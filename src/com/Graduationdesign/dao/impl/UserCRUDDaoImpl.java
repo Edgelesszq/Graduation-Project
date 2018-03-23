@@ -23,7 +23,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		
 		if (t instanceof Student) {
 			 Student student=(Student) t;
-			String sql="select * from student where student_username=? and student_userpassword=?";
+			String sql="select * from student where student_username=? and student_password=?";
 			Student retstudent = null;
 			try {
 				PreparedStatement pStatement=con.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
  		}
 		else if (t instanceof Teacher) {
 			 Teacher teacher=(Teacher) t;
-				String sql="select * from teacher where teacher_username=? and teacher_userpassword=?";
+				String sql="select * from teacher where teacher_username=? and teacher_password=?";
 				Teacher retteacher = null;
 				try {
 					PreparedStatement pStatement=con.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		} 
 		else if (t instanceof Manager) {
 			Manager manager=(Manager) t;
-			String sql="select * from manager where manager_username=? and manager_userpassword=?";
+			String sql="select * from manager where manager_username=? and manager_password=?";
 			Manager retmanager = null;
 			try {
 				PreparedStatement pStatement=con.prepareStatement(sql);
@@ -78,8 +78,24 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			}
 			return retmanager;
 		}
-		else if (t.equals(aManager)) {
-			return null;
+		else if (t instanceof AcademyManager) {
+			AcademyManager amanager=(AcademyManager) t;
+			String sql="select * from amanager where amanager_username=? and amanager_password=?";
+			AcademyManager retamanager = null;
+			try {
+				PreparedStatement pStatement=con.prepareStatement(sql);
+				pStatement.setString(1,amanager.getAmanager_username());
+				pStatement.setString(2, amanager.getAmanager_password());
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					retamanager=new AcademyManager();
+					retamanager.setAmanager_name(rSet.getString("amanager_name"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return retamanager;
 		}
 		// TODO Auto-generated method stub
 		else {
@@ -89,6 +105,16 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 	public Object delete(Object t, Connection con) {
 		if(t instanceof Student) {
 			Student student=(Student)t;
+			String sql="";
+			PreparedStatement pStatement;
+			try {
+				pStatement = con.prepareStatement(sql);
+				pStatement.setString(1,student.getStudent_name());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		return null;
 	}
@@ -96,7 +122,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		return null;
 	}
 	public Object add(Object t, Connection con) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
