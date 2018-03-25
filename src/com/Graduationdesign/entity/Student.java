@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class Student {
+	private int student_id;
      private String student_username;
      private String student_password;
      private String student_name;
@@ -8,6 +9,21 @@ public class Student {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Student(int student_id) {
+		super();
+		this.student_id = student_id;
+	}
+	
+
+	public int getStudent_id() {
+		return student_id;
+	}
+
+	public void setStudent_id(int student_id) {
+		this.student_id = student_id;
+	}
+
 	public Student(String student_username, String student_password) {
 		super();
 		this.student_username = student_username;
