@@ -423,7 +423,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		String sql1="select * from manager";
 		String sql2="select * from amanager";
 		String sql3="select * from teacher";
-		String sql4="select * from manager";
+		String sql4="select * from student";
 		PreparedStatement pStatement;
 		if (type==type_manager) {
 			try {
