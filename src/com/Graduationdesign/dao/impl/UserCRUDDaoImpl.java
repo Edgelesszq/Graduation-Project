@@ -23,6 +23,11 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
       private Manager manager;
       private AcademyManager amanager;
 	  private Dissertation dissertation;
+	  private final static int type_manager=1;
+	  private final static int type_amanager=2;
+      private final static int type_teacher=3;
+	  private final static int type_student=4;
+			  
 
 	public  Object search(Object t, Connection con) {
 		
@@ -395,7 +400,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 	        
 	        try {
 				pStatement=con.prepareStatement(sql);
-				pStatement.setString(1, teacher.getTeacher_id());
+				pStatement.setInt(1, teacher.getTeacher_id());
 				ResultSet rSet=pStatement.executeQuery();
 				while(rSet.next()) {
 					dissertation=new Dissertation();
@@ -414,6 +419,98 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		}
 		return null;
 	}
-    
+	public List searchAllUser(Connection con, int type) {
+		String sql1="select * from manager";
+		String sql2="select * from amanager";
+		String sql3="select * from teacher";
+		String sql4="select * from manager";
+		PreparedStatement pStatement;
+		if (type==type_manager) {
+			try {
+				List<Manager> mList=new ArrayList<Manager>();
+				pStatement=con.prepareStatement(sql1);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					manager=new Manager();
+					manager.setId(resultSet.getInt("manager_id"));
+					manager.setManager_username(resultSet.getString("manager_username"));
+					manager.setManager_username(resultSet.getString("manager_password"));
+					manager.setManager_name(resultSet.getString("manager_name"));
+					mList.add(manager);
+					
+				}
+				return mList;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if (type==type_amanager) {
+			try {
+				List<AcademyManager> amList=new ArrayList<AcademyManager>();
+				pStatement=con.prepareStatement(sql2);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					amanager=new AcademyManager();
+					amanager.setAmanager_id(resultSet.getInt("amanager_id"));
+					amanager.setAmanager_username(resultSet.getString("amanager_username"));
+					amanager.setAmanager_password(resultSet.getString("amanager_password"));
+					amanager.setAmanager_name(resultSet.getString("amanager_name"));
+					amList.add(amanager);
+					
+				}
+				return amList;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if (type==type_teacher) {
+			try {
+				List<Teacher> aTeachers=new ArrayList<Teacher>();
+				pStatement=con.prepareStatement(sql3);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					teacher=new Teacher();
+					teacher.setTeacher_id(resultSet.getInt("teacher_id"));
+					teacher.setTeacher_username(resultSet.getString("teacher_username"));
+					teacher.setTeacher_username(resultSet.getString("teacher_password"));
+					teacher.setTeacher_name(resultSet.getString("teacher_name"));
+					aTeachers.add(teacher);
+					
+				}
+				return aTeachers;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if (type==type_student) {
+			try {
+				List<Student> students=new ArrayList<Student>();
+				pStatement=con.prepareStatement(sql4);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					student=new Student();
+					student.setStudent_id(resultSet.getInt("student_id"));
+					student.setStudent_username(resultSet.getString("student_username"));
+					student.setStudent_password(resultSet.getString("student_password"));
+					student.setStudent_name(resultSet.getString("student_name"));
+					students.add(student);
+					
+				}
+				return students;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return null;
+	}
+   
 
 }

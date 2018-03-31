@@ -27,5 +27,7 @@ public interface UserCRUDDao<T, E> {
      List<Dissertation> Inquire_allstudent(Connection con);
      //查询单个学生的选课情况  或者    单个老师的出题情况
      Dissertation inDissertation_onestudent(Connection con,T t);
+     //查询所有用户信息
+     List<E> searchAllUser(Connection con,int type);
  
 }

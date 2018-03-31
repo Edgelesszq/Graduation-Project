@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class Manager {
+	private int id;
 	private String manager_username;
 	private String manager_password;
 	private String manager_name;
@@ -33,5 +34,14 @@ public class Manager {
 	public void setManager_name(String manager_name) {
 		this.manager_name = manager_name;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 
 }

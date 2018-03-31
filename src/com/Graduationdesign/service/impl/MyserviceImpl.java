@@ -64,7 +64,7 @@ public class MyserviceImpl implements Myservice {
 		Manager inmanager = null;
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Manager> managerlist=userCRUDDaoImpl.search_allmanager(con, 1);
+		List<Manager> managerlist=userCRUDDaoImpl.searchAllUser(con, 1);
 		DbUtil.Conclose(con);
 		return managerlist;
 	}
@@ -74,7 +74,7 @@ public class MyserviceImpl implements Myservice {
 		AcademyManager inmanager = null;
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<AcademyManager> academyManagerlist=userCRUDDaoImpl.search_allmanager(con, 2);
+		List<AcademyManager> academyManagerlist=userCRUDDaoImpl.searchAllUser(con, 2);
 		DbUtil.Conclose(con);
 		return academyManagerlist;
 		
@@ -85,7 +85,7 @@ public class MyserviceImpl implements Myservice {
 		// TODO Auto-generated method stub
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Teacher> teachers=userCRUDDaoImpl.search_allmanager(con,3);
+		List<Teacher> teachers=userCRUDDaoImpl.searchAllUser(con,3);
 		DbUtil.Conclose(con);
 		return teachers;
 	}
@@ -94,7 +94,7 @@ public class MyserviceImpl implements Myservice {
 	public List<Student> searchAllStudent() {
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Student> students=userCRUDDaoImpl.search_allmanager(con,4);
+		List<Student> students=userCRUDDaoImpl.searchAllUser(con,4);
 		DbUtil.Conclose(con);
 		return students;
 	}

@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class AcademyManager {
+	  private int amanager_id;
      private String amanager_name;
      private String amanager_username;
      private String amanager_password;
@@ -31,5 +32,13 @@ public class AcademyManager {
 	public void setAmanager_password(String amanager_password) {
 		this.amanager_password = amanager_password;
 	}
+	public int getAmanager_id() {
+		return amanager_id;
+	}
+	public void setAmanager_id(int amanager_id) {
+		this.amanager_id = amanager_id;
+	}
+	
+	
      
 }
