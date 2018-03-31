@@ -11,7 +11,7 @@
   </welcome-file-list>
   
   
-  
+  <!-- servlet loaction -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.Graduationdesign.servlet.LoginServlet</servlet-class>
@@ -19,6 +19,42 @@
    <servlet-mapping>
    <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
+   </servlet-mapping>
+    <servlet>
+    
+    <servlet-name>SearchAllManager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllManagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllManager</servlet-name>
+    <url-pattern>/allManager</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>SearchAllAmanager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllAManagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllAmanager</servlet-name>
+    <url-pattern>/allAmanager</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>SearchAllTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllTeacherServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllTeacher</servlet-name>
+    <url-pattern>/allTeacher</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>SearchAllStudent</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllStudentServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllStudent</servlet-name>
+    <url-pattern>/allStudent</url-pattern>
    </servlet-mapping>
 </web-app>
   

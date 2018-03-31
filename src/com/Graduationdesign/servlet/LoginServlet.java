@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet{
 			if (remanager!=null) {
 				System.out.println("chenggong");
 				session.setAttribute("manager", remanager);
-				resp.sendRedirect("mian_manager.jsp");
+				resp.sendRedirect("main_manager.jsp");
 			}
 		}
 		else if (type.equals("login_amanager")){
