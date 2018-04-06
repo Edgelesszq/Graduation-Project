@@ -419,16 +419,19 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		}
 		return null;
 	}
-	public List searchAllUser(Connection con, int type) {
-		String sql1="select * from manager";
-		String sql2="select * from amanager";
-		String sql3="select * from teacher";
-		String sql4="select * from student";
+	@SuppressWarnings("static-access")
+	public List searchAllUser(Connection con, int type,int page) {
+		String sql1="select * from manager order by manager_id desc limit ?,?";
+		String sql2="select * from amanager order by amanager_id desc limit ?,?";
+		String sql3="select * from teacher order by teacher_id desc limit ?,?";
+		String sql4="select * from student order by student_id desc limit ?,?";
 		PreparedStatement pStatement;
 		if (type==type_manager) {
 			try {
 				List<Manager> mList=new ArrayList<Manager>();
 				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1,(page-1)*Manager.PAGE_SIZE);
+				pStatement.setInt(2, Manager.PAGE_SIZE);
 				ResultSet resultSet=pStatement.executeQuery();
 				while(resultSet.next()) {
 					manager=new Manager();
@@ -450,6 +453,8 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			try {
 				List<AcademyManager> amList=new ArrayList<AcademyManager>();
 				pStatement=con.prepareStatement(sql2);
+				pStatement.setInt(1,(page-1)*amanager.PAGE_SIZE);
+				pStatement.setInt(2, amanager.PAGE_SIZE);
 				ResultSet resultSet=pStatement.executeQuery();
 				while(resultSet.next()) {
 					amanager=new AcademyManager();
@@ -471,6 +476,8 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			try {
 				List<Teacher> aTeachers=new ArrayList<Teacher>();
 				pStatement=con.prepareStatement(sql3);
+				pStatement.setInt(1,(page-1)*teacher.PAGE_SIZE);
+				pStatement.setInt(2, teacher.PAGE_SIZE);
 				ResultSet resultSet=pStatement.executeQuery();
 				while(resultSet.next()) {
 					teacher=new Teacher();
@@ -492,6 +499,8 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			try {
 				List<Student> students=new ArrayList<Student>();
 				pStatement=con.prepareStatement(sql4);
+				pStatement.setInt(1,(page-1)*teacher.PAGE_SIZE);
+				pStatement.setInt(2, teacher.PAGE_SIZE);
 				ResultSet resultSet=pStatement.executeQuery();
 				while(resultSet.next()) {
 					student=new Student();
@@ -509,7 +518,74 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			}
 			
 		}
+		
 		return null;
+	}
+	public int searchAllnum(Connection con, int type) {
+		String sql1="select count(*) from manager";
+		String sql2="select count(*) from amanager";
+		String sql3="select count(*) from teacher";
+		String sql4="select count(*) from student";
+		int count=0;
+		if(type==type_manager) {
+			try {
+				PreparedStatement pStatement=con.prepareStatement(sql1);
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					count=rSet.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+		}
+		else if(type==type_amanager) {
+			PreparedStatement pStatement;
+			try {
+				pStatement = con.prepareStatement(sql2);
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					count=rSet.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+			
+		}
+		else if(type==type_teacher) {
+			PreparedStatement pStatement;
+			try {
+				pStatement = con.prepareStatement(sql3);
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					count=rSet.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+			
+		}
+		else if(type==type_student) {
+			PreparedStatement pStatement;
+			try {
+				pStatement = con.prepareStatement(sql4);
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					count=rSet.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+			
+		}
+		return 0;
 	}
    
 

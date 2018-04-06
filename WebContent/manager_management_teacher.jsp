@@ -19,7 +19,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% List<Teacher> list=(List<Teacher>)session.getAttribute("reTeachers"); %>
+<% List<Teacher> list=(List<Teacher>)request.getAttribute("reTeachers"); %>
 
        <div class="container">
            <div class="row">
@@ -48,6 +48,7 @@
                  <%} %>
                   
                         
+                 <tr><td align="center" colspan="6"><%=request.getAttribute("bar3") %></td></tr>
                   
                   
                   </table>    

@@ -1,6 +1,8 @@
 package com.Graduationdesign.entity;
 
 public class Student {
+	public static final int PAGE_SIZE=10;
+
 	private int student_id;
      private String student_username;
      private String student_password;

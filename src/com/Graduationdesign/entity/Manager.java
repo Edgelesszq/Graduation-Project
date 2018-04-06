@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class Manager {
+	public static final int PAGE_SIZE=10;
 	private int id;
 	private String manager_username;
 	private String manager_password;
@@ -11,17 +12,30 @@ public class Manager {
 		this.manager_password = manager_password;
 	}
 	
+	
+	public Manager(int id, String manager_username, String manager_password, String manager_name) {
+		super();
+		this.id = id;
+		this.manager_username = manager_username;
+		this.manager_password = manager_password;
+		this.manager_name = manager_name;
+	}
+
+
 	public Manager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public String getManager_username() {
 		return manager_username;
 	}
+
 	public void setManager_username(String manager_username) {
 		this.manager_username = manager_username;
 	}
+
 	public String getManager_password() {
 		return manager_password;
 	}

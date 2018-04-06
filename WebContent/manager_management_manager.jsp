@@ -19,7 +19,7 @@
 
 </head>
 <body>
-<% List<Manager> list=(List<Manager>)session.getAttribute("resultmanagers"); %>
+<% List<Manager> list=(List<Manager>)request.getAttribute("resultmanagers"); %>
 
        <div class="container">
            <div class="row">
@@ -38,19 +38,24 @@
                   <div class="col-md-8">
                   <!-- 表格 -->
                   <table class="table table-hover">
-                  <tr><th></th><th>用户名</th><th>密码</th><th>姓名</th><th>删除</th><th>修改</th></tr>
+                  <tr><th>id</th><th>用户名</th><th>密码</th><th>姓名</th><th>删除</th><th>修改</th></tr>
                   <% for(int i=0;i<list.size();i++){ %>
-                  <tr><td><%=list.get(i).getId() %></td>
-                      <td><%=list.get(i).getManager_username()%></td>  
+                  <tr>
+                      <td><%=list.get(i).getId() %></td>
+                      <td><%=list.get(i).getManager_username() %></td>
                       <td><%=list.get(i).getManager_password() %></td>
                       <td><%=list.get(i).getManager_name() %></td>
+                      <td></td>
                       <td></td>
                       
                    </tr>
                  <%} %>  
+                <tr><td align="center" colspan="6"><%=request.getAttribute("bar") %></td></tr>
+                 
                   </table>
+                  
                   <div class="col-md-8">
-                  <span><a herf="">添加管理员</a></span>
+                  <span><a href="manager_add_student.jsp">添加管理员</a></span>
                   </div>      
            </div>
        </div>

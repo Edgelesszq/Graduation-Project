@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% List<AcademyManager> list=(List<AcademyManager>)session.getAttribute("resultAcManager"); %>
+<% List<AcademyManager> list=(List<AcademyManager>)request.getAttribute("resultAcManager"); %>
 
        <div class="container">
            <div class="row">
@@ -43,12 +43,14 @@
                   <td><%=list.get(i).getAmanager_username() %></td>
                   <td><%=list.get(i).getAmanager_password() %></td>
                   <td><%=list.get(i).getAmanager_name() %></td>
-                  
+                  <td></td>
+                  <td></td>
                   </tr>
                  <%} %>
                   
                         
                   
+      <tr><td align="center" colspan="6"><%=request.getAttribute("bar2") %></td></tr>
                   
                   </table>    
 

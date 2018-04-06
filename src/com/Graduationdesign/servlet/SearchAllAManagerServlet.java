@@ -32,10 +32,49 @@ public class SearchAllAManagerServlet extends HttpServlet {
 		MyserviceImpl myserviceImpl = null;
 		HttpSession session=req.getSession();
 		
-        myserviceImpl=new MyserviceImpl();
-        List<AcademyManager> resultAcManager=myserviceImpl.searchAllAcademy();
-        session.setAttribute("resultAcManager",resultAcManager);
-        resp.sendRedirect("manager_management_academy.jsp");
+		int currentpage=1;
+		if(req.getParameter("page")!=null) {
+			currentpage=Integer.parseInt(req.getParameter("page"));//对当前页码进行有效赋值
+		}
+		 myserviceImpl=new MyserviceImpl();
+	     List<AcademyManager> resultAcManager=myserviceImpl.searchAllAcademy(currentpage);
+		int count=myserviceImpl.search_all_Amanager_Num();
+		int pages;
+		if(count%Manager.PAGE_SIZE==0) {
+			pages=count/Manager.PAGE_SIZE;
+		}
+		else {
+			pages=count/Manager.PAGE_SIZE+1;
+		}
+		StringBuffer sBuffer=new StringBuffer();
+		for(int i=1;i<=pages;i++) {
+			if(i==currentpage)
+			{
+				sBuffer.append("["+i+"]");
+				
+			}
+			else {
+				sBuffer.append("<a href='allAmanager?page="+i+"'>"+i+"</a>");
+			}
+			sBuffer.append(" ");
+			
+		}
+		req.setAttribute("bar2", sBuffer.toString());
+		
+	
+	   
+          
+       req.setAttribute("resultAcManager",resultAcManager);
+       req.getRequestDispatcher("manager_management_academy.jsp").forward(req, resp);
+      // resp.sendRedirect("manager_management_manager.jsp");
+         
+		
+		
+		
+		
+		
+       
+       
           
 			
 	}

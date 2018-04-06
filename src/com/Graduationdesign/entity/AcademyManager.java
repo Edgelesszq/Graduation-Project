@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class AcademyManager {
+	public static final int PAGE_SIZE=10;
 	  private int amanager_id;
      private String amanager_name;
      private String amanager_username;

@@ -12,9 +12,13 @@ public interface Myservice {
 
 	
 	 <T> T loginService(T t);
-	 List<Manager> searchALlService( );
-	 List<AcademyManager> searchAllAcademy();
-	 List<Teacher> searchAllTeacher();
-	 List<Student> searchAllStudent();
+	 List<Manager> searchALlService(int currentpages);
+	 List<AcademyManager> searchAllAcademy(int currentpages);
+	 List<Teacher> searchAllTeacher(int currentpages);
+	 List<Student> searchAllStudent(int currentpages);
 	 Integer quantityAddStudent();
+	 int search_all_manager_Num();
+	 int search_all_Amanager_Num();
+	 int search_all_teacher_Num();
+	 int search_all_student_Num();
 }

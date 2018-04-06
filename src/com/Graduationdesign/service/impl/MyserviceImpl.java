@@ -59,42 +59,46 @@ public class MyserviceImpl implements Myservice {
 	}
 
 
-	@SuppressWarnings("unused")
-	public List<Manager> searchALlService() {
+	@SuppressWarnings("unchecked")
+	public List<Manager> searchALlService(int currentpages) {
+		
+		
 		Manager inmanager = null;
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Manager> managerlist=userCRUDDaoImpl.searchAllUser(con, 1);
+		List<Manager> managerlist=userCRUDDaoImpl.searchAllUser(con, 1,currentpages);
 		DbUtil.Conclose(con);
 		return managerlist;
 	}
 
 
-	public List<AcademyManager> searchAllAcademy() {
-		AcademyManager inmanager = null;
+	@SuppressWarnings("unchecked")
+	public List<AcademyManager> searchAllAcademy(int currentpages) {
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<AcademyManager> academyManagerlist=userCRUDDaoImpl.searchAllUser(con, 2);
+		List<AcademyManager> academyManagerlist=userCRUDDaoImpl.searchAllUser(con, 2,currentpages);
 		DbUtil.Conclose(con);
 		return academyManagerlist;
 		
 	}
 
 
-	public List<Teacher> searchAllTeacher() {
+	@SuppressWarnings("unchecked")
+	public List<Teacher> searchAllTeacher(int currentpages) {
 		// TODO Auto-generated method stub
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Teacher> teachers=userCRUDDaoImpl.searchAllUser(con,3);
+		List<Teacher> teachers=userCRUDDaoImpl.searchAllUser(con,3,currentpages);
 		DbUtil.Conclose(con);
 		return teachers;
 	}
 
 
-	public List<Student> searchAllStudent() {
+	@SuppressWarnings("unchecked")
+	public List<Student> searchAllStudent(int currentpages) {
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		List<Student> students=userCRUDDaoImpl.searchAllUser(con,4);
+		List<Student> students=userCRUDDaoImpl.searchAllUser(con,4,currentpages);
 		DbUtil.Conclose(con);
 		return students;
 	}
@@ -104,5 +108,37 @@ public class MyserviceImpl implements Myservice {
 		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
 		return 0;
+	}
+
+
+	public int search_all_manager_Num() {
+		Connection con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+		int totalnum=userCRUDDaoImpl.searchAllnum(con,1);
+		return totalnum;
+	}
+
+
+	public int search_all_Amanager_Num() {
+		Connection con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+		int totalnum=userCRUDDaoImpl.searchAllnum(con,2);
+		return totalnum;
+	}
+
+
+	public int search_all_teacher_Num() {
+		Connection con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+		int totalnum=userCRUDDaoImpl.searchAllnum(con,3);
+		return totalnum;
+	}
+
+
+	public int search_all_student_Num() {
+		Connection con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+		int totalnum=userCRUDDaoImpl.searchAllnum(con,4);
+		return totalnum;
 	}
 }
