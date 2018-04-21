@@ -16,6 +16,7 @@
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
 <title>Insert title here</title>
+<%session.getAttribute("manager"); %>
 
 </head>
 <body>
@@ -55,7 +56,7 @@
                   </table>
                   
                   <div class="col-md-8">
-                  <span><a href="manager_add_student.jsp">添加管理员</a></span>
+                  <span><a href="manager_manager.jsp">添加管理员</a></span>
                   </div>      
            </div>
        </div>

@@ -7,21 +7,31 @@ public class Teacher {
 	private String teacher_username;
 	private String teacher_password;
 	private String teacher_name;
-
-
-
-
+	private int academy_id;
+	public Teacher() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Teacher(int teacher_id, String teacher_username, String teacher_password, String teacher_name,
+			int academy_id) {
+		super();
+		this.teacher_id = teacher_id;
+		this.teacher_username = teacher_username;
+		this.teacher_password = teacher_password;
+		this.teacher_name = teacher_name;
+		this.academy_id = academy_id;
+	}
 	public Teacher(String teacher_username, String teacher_password) {
 		super();
 		this.teacher_username = teacher_username;
 		this.teacher_password = teacher_password;
 	}
-	public Teacher() {
+	
+	public Teacher(int teacher_id, String teacher_username) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.teacher_id = teacher_id;
+		this.teacher_username = teacher_username;
 	}
-	
-	
 	public int getTeacher_id() {
 		return teacher_id;
 	}
@@ -46,5 +56,26 @@ public class Teacher {
 	public void setTeacher_name(String teacher_name) {
 		this.teacher_name = teacher_name;
 	}
+	public int getAcademy_id() {
+		return academy_id;
+	}
+	public void setAcademy_id(int academy_id) {
+		this.academy_id = academy_id;
+	}
+	public static int getPageSize() {
+		return PAGE_SIZE;
+	}
+	public Teacher(String teacher_username, String teacher_password, String teacher_name, int academy_id) {
+		super();
+		this.teacher_username = teacher_username;
+		this.teacher_password = teacher_password;
+		this.teacher_name = teacher_name;
+		this.academy_id = academy_id;
+	}
+
+
+
+
+	
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.Graduationdesign.dao.impl.UserCRUDDaoImpl;
+import com.Graduationdesign.entity.Academy;
 import com.Graduationdesign.entity.AcademyManager;
 import com.Graduationdesign.entity.Manager;
 import com.Graduationdesign.entity.Student;
@@ -141,4 +142,24 @@ public class MyserviceImpl implements Myservice {
 		int totalnum=userCRUDDaoImpl.searchAllnum(con,4);
 		return totalnum;
 	}
+
+
+	public List<Academy> searchAllAcademy() {
+		con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+		@SuppressWarnings("unchecked")
+		List<Academy> lAcademies=userCRUDDaoImpl.searchAllAcademy(con);
+		return lAcademies;
+	}
+
+
+	public int addAcademy(Academy academy) {
+		con=DbUtil.getCon();
+		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+        int totalnum=userCRUDDaoImpl.addAcademy(academy, con);
+		return totalnum;
+	}
+
+
+	
 }

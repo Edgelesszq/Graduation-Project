@@ -1,3 +1,4 @@
+<%@page import="com.Graduationdesign.entity.Academy"%>
 <%@page import="com.Graduationdesign.entity.AcademyManager"%>
 <%@page import="com.Graduationdesign.entity.Manager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -16,19 +17,21 @@
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
 <title>Insert title here</title>
+
 </head>
 <body>
-<% List<AcademyManager> list=(List<AcademyManager>)request.getAttribute("resultAcManager"); %>
-
+<% List<Academy> list=(List<Academy>)session.getAttribute("academylist"); %>
+       
        <div class="container">
            <div class="row">
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
                           <li role="presentation" > <a href="main_manager.jsp">首页</a></li>
-         
-						  <li role="presentation" ><a href="allManager">管理系统账户</a></li>
-						  <li role="presentation" class="active"><a href="allAmanager">管理学院账户</a></li>
+
+                          
+						  <li role="presentation" class="active"><a href="allManager">管理系统账户</a></li>
+						  <li role="presentation"><a href="allAmanager">管理学院账户</a></li>
 						  <li role="presentation"><a href="allTeacher">管理老师账户</a></li>
 						  <li role="presentation"><a href="allStudent">管理学生账户</a></li>
 					</ul>    
@@ -36,29 +39,23 @@
                   <div class="col-md-8">
                   <!-- 表格 -->
                   <table class="table table-hover">
-                  <tr><th></th><th>用户名</th><th>密码</th><th>姓名</th><th>删除</th><th>修改</th></tr>
-                  <% for(int i=0;i<list.size();i++){ %>
+                  <tr><th>id</th><th>学院名</th></tr>
+                  <%
+                  
+                  int size=list.size();
+                  for(int i=0;i<size;i++){ %>
                   <tr>
-                  <td><%=list.get(i).getAmanager_id() %></td>
-                  <td><%=list.get(i).getAmanager_username() %></td>
-                  <td><%=list.get(i).getAmanager_password() %></td>
-                  <td><%=list.get(i).getAmanager_name() %></td>
-                  <td></td>
-                  <td></td>
-                  </tr>
-                 <%} %>
+                      <td><%=list.get(i).getAcademy_id() %></td>
+                      <td><%=list.get(i).getAcademy_name() %></td>        
+                   </tr>
+                 <%} %>  
+                 
+                  </table>
                   
-                        
+                  <div class="col-md-8">
+                  <span><a href="manager_academy.jsp">管理学院</a></span>
                   
-      <tr><td align="center" colspan="6"><%=request.getAttribute("bar2") %></td></tr>
-                  
-                  </table>    
-
- 					</div>
-                  
-                  
-                  
-                  
+                  </div>      
            </div>
        </div>
 </body>

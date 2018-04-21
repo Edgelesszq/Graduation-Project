@@ -65,7 +65,7 @@ public class SearchAllAManagerServlet extends HttpServlet {
 	   
           
        req.setAttribute("resultAcManager",resultAcManager);
-       req.getRequestDispatcher("manager_management_academy.jsp").forward(req, resp);
+       req.getRequestDispatcher("manager_management_amanager.jsp").forward(req, resp);
       // resp.sendRedirect("manager_management_manager.jsp");
          
 		

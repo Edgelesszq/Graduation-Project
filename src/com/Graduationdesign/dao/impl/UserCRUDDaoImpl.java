@@ -1,5 +1,7 @@
 package com.Graduationdesign.dao.impl;
 
+import java.security.Permission;
+import java.security.Permissions;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Graduationdesign.dao.UserCRUDDao;
+import com.Graduationdesign.entity.Academy;
 import com.Graduationdesign.entity.AcademyManager;
+import com.Graduationdesign.entity.Class;
 import com.Graduationdesign.entity.Dissertation;
 import com.Graduationdesign.entity.Manager;
+import com.Graduationdesign.entity.Profession;
 import com.Graduationdesign.entity.Student;
 import com.Graduationdesign.entity.Teacher;
+import com.mysql.jdbc.RowData;
 
 
 
@@ -23,10 +29,29 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
       private Manager manager;
       private AcademyManager amanager;
 	  private Dissertation dissertation;
+	  private Academy academy;
+	  private Profession profession;
+	  private Class aClass;
+	 private  PreparedStatement pStatement;
+	  private ResultSet resultSet;
+	  
+	  private List<Student> listStudent;
+	  private List<Academy> academies;
+	  private List<Profession> professions;
+	  private List<Class> cList;
+	
 	  private final static int type_manager=1;
 	  private final static int type_amanager=2;
       private final static int type_teacher=3;
 	  private final static int type_student=4;
+	  private final static int type_academy=5;
+	  private final static int type_permission=6;
+	  private final static int type_class=7;
+	  
+	  
+	  private final static int type_student_name=1;
+	  private final static int type_student_username=2;
+
 			  
 
 	public  Object search(Object t, Connection con) {
@@ -80,7 +105,9 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 				ResultSet rSet=pStatement.executeQuery();
 				while(rSet.next()) {
 					retmanager=new Manager();
+					retmanager.setId(rSet.getInt("manager_id"));
 					retmanager.setManager_name(rSet.getString("manager_name"));
+					retmanager.setManager_username(rSet.getString("manager_username"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -108,6 +135,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			return retamanager;
 		}
 		// TODO Auto-generated method stub
+		
 		else {
 			return null;
 		}
@@ -199,65 +227,84 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			}
 		return false;
 	}
-	public Object add(Object t, Connection con) {
+	public Integer add(Object t, Connection con) {
+	int rSet=0;
+	if(t instanceof Manager) {
+		manager=(Manager) t;
+		String sql="Insert into manager(manager_username,manager_password,manager_name) values(?,?,?)";
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1, manager.getManager_username());
+			pStatement.setString(2, manager.getManager_password());
+			pStatement.setString(3, manager.getManager_name());
+			rSet=pStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rSet;
+	}
 	if (t instanceof AcademyManager) {
 		 amanager=(AcademyManager) t;
-		String sql="Insert into manager(manager_username,manager_password,manager_name) values(?,?,?)";
+		 
+		String sql="Insert into amanager(amanager_username,amanager_password,amanager_name,academy_id) values(?,?,?,?)";
 		PreparedStatement pStatement;
 		try {
 			pStatement = con.prepareStatement(sql);
 			pStatement.setString(1,amanager.getAmanager_username());
 			pStatement.setString(2,amanager.getAmanager_password());
 			pStatement.setString(3, amanager.getAmanager_name());
-			ResultSet rSet=pStatement.executeQuery();
-			if (rSet!=null) {
-				return true;
-			}
+			pStatement.setInt(4, amanager.getAcademy_id());
+			rSet=pStatement.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		return rSet;
 	}
 	else if (t instanceof Teacher) {
 		 teacher=(Teacher) t;
-		String sql="Insert into teacher(teacher_username,teacher_password,teacher_name) values(?,?,?)";
+		String sql="Insert into teacher(teacher_username,teacher_password,teacher_name,academy_id) values(?,?,?,?)";
 		PreparedStatement pStatement;
 		try {
 			pStatement = con.prepareStatement(sql);
 			pStatement.setString(1,teacher.getTeacher_username());
 			pStatement.setString(2,teacher.getTeacher_password());
 			pStatement.setString(3, teacher.getTeacher_name());
-			ResultSet rSet=pStatement.executeQuery();
-			if (rSet!=null) {
-				return true;
-			}
+			pStatement.setInt(4, teacher.getAcademy_id());
+
+			 rSet=pStatement.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		return rSet;
 	}
 	else if (t instanceof Student) {
 		 student=(Student) t;
-		String sql="Insert into student(student_username,student_password,student_name) values(?,?,?)";
+		String sql="Insert into student(student_username,student_password,student_name,class_id) values(?,?,?,?)";
 		PreparedStatement pStatement;
 		try {
 			pStatement = con.prepareStatement(sql);
 			pStatement.setString(1,student.getStudent_username());
 			pStatement.setString(2,student.getStudent_password());
 			pStatement.setString(3, student.getStudent_name());
-			ResultSet rSet=pStatement.executeQuery();
-			if (rSet!=null) {
-				return true;
-			}
+			pStatement.setInt(4,student.getClass_id());
+			rSet=pStatement.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+		return rSet;	
 	}
-	return false;	
+	return rSet;
+	
 	}
 	public List search_all(Integer t,Connection con) {
 		
@@ -437,7 +484,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 					manager=new Manager();
 					manager.setId(resultSet.getInt("manager_id"));
 					manager.setManager_username(resultSet.getString("manager_username"));
-					manager.setManager_username(resultSet.getString("manager_password"));
+					manager.setManager_password(resultSet.getString("manager_password"));
 					manager.setManager_name(resultSet.getString("manager_name"));
 					mList.add(manager);
 					
@@ -587,6 +634,515 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		}
 		return 0;
 	}
+	public List searchByStudentName(Connection con, Student student,int type) {
+		String sql1="select * from student where student_name like ?";//根据学生名字模糊查询
+		String sql2="select * from student where student_username like ?";//根据学生的username模糊 查询
+		if(type==type_student_name) {
+			
+		
+		try {
+			PreparedStatement pStatement=con.prepareStatement(sql1);
+			pStatement.setString(1,"%"+student.getStudent_name()+"%");
+			ResultSet rSet=pStatement.executeQuery();
+			while(rSet.next()){
+				student=new Student();
+				student.setClass_id(rSet.getInt("student_id"));
+				student.setStudent_name(rSet.getString("student_name"));
+				student.setStudent_username(rSet.getString("student_username"));
+				student.setStudent_password(rSet.getString("student_password"));
+				student.setClass_id(rSet.getInt("class_id"));
+				listStudent=new ArrayList<Student>();
+				listStudent.add(student);
+				
+				
+			}
+			return listStudent;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		else if(type==type_student_username) {
+			
+			
+			try {
+				PreparedStatement pStatement=con.prepareStatement(sql1);
+				pStatement.setString(1,"%"+student.getStudent_username()+"%");
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()){
+					student=new Student();
+					student.setClass_id(rSet.getInt("student_id"));
+					student.setStudent_name(rSet.getString("student_name"));
+					student.setStudent_username(rSet.getString("student_username"));
+					student.setStudent_password(rSet.getString("student_password"));
+					student.setClass_id(rSet.getInt("class_id"));
+					listStudent=new ArrayList<Student>();
+					listStudent.add(student);
+					
+					
+				}
+				return listStudent;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		return null;
+	}
+	public int addAcademy(Academy academy, Connection con) {
+		int i=0;
+		String sql="insert into academy(academy_id,academy_name) values(?,?)";
+		try {
+			
+			PreparedStatement pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1,academy.getAcademy_id());
+			pStatement.setString(2,academy.getAcademy_name());
+			i=pStatement.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+		
+	}
+	public int addProfession(Profession profession, Connection con) {
+		int i=0;
+		String sql="insert into ";
+		try {
+			
+			PreparedStatement pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,"");
+			ResultSet rSet=pStatement.executeQuery();
+			while (rSet.next()) {
+				
+				i++;
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+	public int addClass(Class class1, Connection con) {
+		int i=0;
+		String sql="insert into ";
+		try {
+			
+			PreparedStatement pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,"");
+			ResultSet rSet=pStatement.executeQuery();
+			while (rSet.next()) {
+				
+				i++;
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+	public Profession searchPBA() {
+		return null;
+	}
+	public Class searchCBP() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List searchAllAcademy(Connection con) {
+			String sql="select * from academy";
+			List<Academy> academies = null;
+			Academy reacademy=null;
+			try {
+				PreparedStatement pStatement=con.prepareStatement(sql);
+				ResultSet resultSet=pStatement.executeQuery();
+				academies=new ArrayList<Academy>();
+				while(resultSet.next()) {
+					reacademy=new Academy();
+					
+					reacademy.setAcademy_id(resultSet.getInt("academy_id"));
+					reacademy.setAcademy_name(resultSet.getString("academy_name"));
+					academies.add(reacademy);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return academies;
+		
+		
+	}
+	public List searchAllProfession(Connection con) {
+		String sql="select * from profession";
+		professions=new ArrayList<Profession>();
+		try {
+			
+			PreparedStatement preparedStatement=con.prepareStatement(sql);
+			ResultSet rSet=preparedStatement.executeQuery();
+			while(rSet.next()) {
+		    profession=new Profession();
+			profession.setProfession_id(rSet.getInt("profession_id"));
+			profession.setProfession_name(rSet.getString("profession_name"));	
+			profession.setAcademy_id(rSet.getInt("academy_id"));
+			professions.add(profession);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return professions;
+	}
+	public List searchAllProfessionbyAcademy(Connection con, Academy academy) {
+		String sql="select * from profession where academy_id=?";
+		try {
+			 pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1,academy.getAcademy_id());
+			professions=new ArrayList<Profession>();
+			 resultSet=pStatement.executeQuery();
+			 while(resultSet.next()) {
+				    profession=new Profession();
+					profession.setProfession_id(resultSet.getInt("profession_id"));
+					profession.setProfession_name(resultSet.getString("profession_name"));	
+					profession.setAcademy_id(resultSet.getInt("academy_id"));
+					professions.add(profession);
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return professions;
+	}
+	public List searchAllclass(Connection con) {
+		String sql="select * from class";
+		cList=new ArrayList<Class>();
+		try {
+			
+			pStatement=con.prepareStatement(sql);
+			 resultSet=pStatement.executeQuery();
+			 while(resultSet.next()) {
+				 aClass=new Class();
+				 aClass.setClass_id(resultSet.getInt("class_id"));
+				 aClass.setClass_name(resultSet.getString("class_name"));
+				 aClass.setProfession_id(resultSet.getInt("profession_id"));
+				 cList.add(aClass);
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cList;
+	}
+	public List searchclassbyProfession(Connection con, Profession profession) {
+		String sql="select * from class where profession_id=?";
+		cList=new ArrayList<Class>();
+		try {
+			 
+		      pStatement=con.prepareStatement(sql);
+		      pStatement.setInt(1, profession.getProfession_id());
+		      resultSet=pStatement.executeQuery();
+		      while(resultSet.next()) {
+		    	  aClass=new Class();
+		    	  aClass.setClass_id(resultSet.getInt("class_id"));
+				 aClass.setClass_name(resultSet.getString("class_name"));
+			     aClass.setProfession_id(resultSet.getInt("profession_id"));
+			      cList.add(aClass);
+		      }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cList;
+	}
+	public List searchAllStuFAcademy(Connection con, Academy academy) {
+		String sql="select * from student where class_id in(select class_id from class where profession_id in(select profession_id from profession where academy_id in(select academy_id from academy where academy_id=?)))";
+		listStudent=new ArrayList<Student>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, academy.getAcademy_id());
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				student=new Student();
+				student.setClass_id(resultSet.getInt("student_id"));
+				student.setStudent_name(resultSet.getString("student_name"));
+				student.setStudent_username(resultSet.getString("student_username"));
+				student.setStudent_password(resultSet.getString("student_password"));
+				student.setClass_id(resultSet.getInt("class_id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listStudent;
+	}
+	public List searchAllStuFProfession(Connection con, Profession profession) {
+		String sql="SELECT * FROM student WHERE class_id IN(SELECT class_id FROM class WHERE profession_id=1)";
+		listStudent=new ArrayList<Student>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, profession.getProfession_id());
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				student=new Student();
+				student.setClass_id(resultSet.getInt("student_id"));
+				student.setStudent_name(resultSet.getString("student_name"));
+				student.setStudent_username(resultSet.getString("student_username"));
+				student.setStudent_password(resultSet.getString("student_password"));
+				student.setClass_id(resultSet.getInt("class_id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listStudent;
+	}
+	public List searchAllStuFClass(Connection con, Class class1) {
+		String sql="select * from student where class_id=?";
+		
+		listStudent=new ArrayList<Student>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, class1.getClass_id());
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				student=new Student();
+				student.setClass_id(resultSet.getInt("student_id"));
+				student.setStudent_name(resultSet.getString("student_name"));
+				student.setStudent_username(resultSet.getString("student_username"));
+				student.setStudent_password(resultSet.getString("student_password"));
+				student.setClass_id(resultSet.getInt("class_id"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listStudent;
+	}
+	public Integer deleteManagerbyType(Connection con, int type, Manager manager) {
+		String sql1="delete from manager where manager_id=?";
+		String sql2="delete from manager where manager_username=?";
+		int row=0;
+		if(type==1) {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1,manager.getId());
+			     row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return row;
+		}
+		else {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setString(2,manager.getManager_username());
+			      row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+		}
+		
+		
+		
+	}
+	public Integer deleteAmanagerbyType(Connection con, int type, AcademyManager aManager) {
+		String sql1="delete from amanager where amanager_id=?";
+		String sql2="delete from amanager where amanager_username=?";
+		int row=0;
+		if(type==1) {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1,amanager.getAcademy_id());
+			     row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return row;
+		}
+		else {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setString(2,amanager.getAmanager_username());
+			      row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+		}
+	}
+	public Integer deleteTeacherbyType(Connection con, int type, Teacher teacher) {
+		String sql1="delete from teacher where teacher_id=?";
+		String sql2="delete from teacher where teacher_username=?";
+		int row=0;
+		if(type==1) {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1,teacher.getTeacher_id());
+			     row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return row;
+		}
+		else {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setString(2,teacher.getTeacher_name());
+			      row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+		}
+	}
+	public Integer deleteStudentbyType(Connection con, int type, Student student) {
+		String sql1="delete from student where student_id=?";
+		String sql2="delete from student where student_username=?";
+		int row=0;
+		if(type==1) {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1,student.getStudent_id());
+			    row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return row;
+		}
+		else {
+			try {
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setString(2,student.getStudent_username());
+			    row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+		}
+	}
+	public Integer updateStudentInfo(Connection con, Student student) {
+		String sql="update student set student_name=? , student_password=? where student_id=?";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,student.getStudent_name());
+			pStatement.setString(2, student.getStudent_password());
+			pStatement.setInt(3, student.getStudent_id());
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	public Integer updateTeacherInfo(Connection con, Teacher teacher) {
+		String sql="update student set teacher_name=? , teacher_password=? where teacher_id=?";
+		String sql2="update student set teacher_name=? where teacher_id=?";
+
+		String sql3="update student set teacher_name=? where teacher_id=?";
+
+		if(teacher.getTeacher_password()==""&&teacher.getTeacher_name()!=null) {
+			return 0;
+		}
+		else if(teacher.getTeacher_name()==""){
+			return 0;
+		}
+		else {
+			int row=0;
+			try {
+				pStatement=con.prepareStatement(sql);
+				pStatement.setString(1,student.getStudent_name());
+				pStatement.setInt(2, student.getStudent_id());
+				row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+		}
+		}
+		
+	public Integer updateManagerInfo(Connection con, Manager manager) {
+		String sql="update manager set manager_password=?,manager_name=? where manager_id=?";
+		String sql2="update manager set manager_password=? where manager_id=?";
+		String sql3="update manager set manager_name=? where manager_id=?";
+        if(manager.getManager_name()==""&&manager.getManager_password()!="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql2);
+    			pStatement.setString(1,manager.getManager_password());
+    			
+    			pStatement.setInt(2, manager.getId());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+        }
+        else if(manager.getManager_name()!=""&&manager.getManager_password()=="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql3);
+    			
+    			pStatement.setString(1,manager.getManager_name());
+    			pStatement.setInt(2, manager.getId());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+        }
+        else {
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,manager.getManager_password());
+			pStatement.setString(2,manager.getManager_name());
+			pStatement.setInt(3, manager.getId());
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+        }
+	}
+	public Integer updateAmanagerInfo(Connection con, AcademyManager amanager) {
+		String sql="update manager set amanager_password=?,amanager_name=? where amanager_=?";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,amanager.getAmanager_password());
+			pStatement.setString(1,amanager.getAmanager_name());
+			pStatement.setInt(3, amanager.getAcademy_id());
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+
+	
+	
+	
    
 
 }

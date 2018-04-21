@@ -13,9 +13,60 @@ public class Manager {
 	}
 	
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ""+getManager_username()+"";
+	}
+
+
+	public Manager(int id) {
+		super();
+		this.id = id;
+	}
+
+
+	public Manager(String manager_username) {
+		super();
+		this.manager_username = manager_username;
+	}
+
+
+
+
+
+	
+
+
+	public Manager(int id, String manager_password, String manager_name) {
+		super();
+		this.id = id;
+		this.manager_password = manager_password;
+		this.manager_name = manager_name;
+	}
+
+
+	
+
+
+	public Manager(int id, String manager_username) {
+		super();
+		this.id = id;
+		this.manager_username = manager_username;
+	}
+
+
 	public Manager(int id, String manager_username, String manager_password, String manager_name) {
 		super();
 		this.id = id;
+		this.manager_username = manager_username;
+		this.manager_password = manager_password;
+		this.manager_name = manager_name;
+	}
+
+
+	public Manager(String manager_username, String manager_password, String manager_name) {
+		super();
 		this.manager_username = manager_username;
 		this.manager_password = manager_password;
 		this.manager_name = manager_name;

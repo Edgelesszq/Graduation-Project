@@ -8,12 +8,7 @@
 </head>
 <body>
       <div>
-           <ul>
-                <li><a href="#">管理论文</a></li>
-                <li><a href="#">查看论文信息</a></li>
-                <li><a href="#"></a></li>
-                
-           </ul>
+      
       </div>
 </body>
 </html>

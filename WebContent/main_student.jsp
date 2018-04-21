@@ -8,10 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<div class="container">
-<div class="row">
-   <div class="col-md-12"></div>
-</div>
+<div>
+     <ul>
+          <li><a href="#">修改个人信息</a></li>
+          <li><a href="#">查看个人信息</a></li>
+          <li><a href="#">论文选择</a></li>
+     </ul>
+   
 </div>
    
 </body>

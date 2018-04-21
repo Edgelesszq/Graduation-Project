@@ -56,5 +56,60 @@
    <servlet-name>SearchAllStudent</servlet-name>
     <url-pattern>/allStudent</url-pattern>
    </servlet-mapping>
+   
+    <servlet>
+    <servlet-name>AddAcademy</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddAcademyservlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddAcademy</servlet-name>
+    <url-pattern>/addAcademy</url-pattern>
+   </servlet-mapping>
+   
+    <servlet>
+    <servlet-name>SearchAllAcademy</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllAcademyServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllAcademy</servlet-name>
+    <url-pattern>/searchAllAcademy</url-pattern>
+   </servlet-mapping>
+   
+   
+    <servlet>
+    <servlet-name>AddAManager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddAmanagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddAManager</servlet-name>
+    <url-pattern>/addAmanager</url-pattern>
+   </servlet-mapping>
+   
+     <servlet>
+    <servlet-name>AddManager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddManagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddManager</servlet-name>
+    <url-pattern>/addManager</url-pattern>
+   </servlet-mapping>
+   
+     <servlet>
+    <servlet-name>DeleteManager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteManagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteManager</servlet-name>
+    <url-pattern>/deleteManager</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>UpdateManagerInfo</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateManagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateManagerInfo</servlet-name>
+    <url-pattern>/updateManagerInfo</url-pattern>
+   </servlet-mapping>
 </web-app>
   

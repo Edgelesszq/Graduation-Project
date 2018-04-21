@@ -16,36 +16,46 @@
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
 <title>Insert title here</title>
-<%session.getAttribute("manager"); %>
+
 </head>
 <body>
+<% List<AcademyManager> list=(List<AcademyManager>)request.getAttribute("resultAcManager"); %>
 
        <div class="container">
            <div class="row">
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_manager.jsp">首页</a></li>
-                          
-						  <li role="presentation"><a href="allManager">管理系统账户</a></li>
-						  <li role="presentation"><a href="allAmanager">管理学院账户</a></li>
+                          <li role="presentation" > <a href="main_manager.jsp">首页</a></li>
+         
+						  <li role="presentation" ><a href="allManager">管理系统账户</a></li>
+						  <li role="presentation" class="active"><a href="allAmanager">管理学院账户</a></li>
 						  <li role="presentation"><a href="allTeacher">管理老师账户</a></li>
 						  <li role="presentation"><a href="allStudent">管理学生账户</a></li>
-						  <li role="presentation"><a href="addAcademy">添加学院</a></li>
-						  <li role="presentation"><a href="searchAllAcademy">管理学院</a></li>
-						  
 					</ul>    
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
                   <table class="table table-hover">
                   <tr><th></th><th>用户名</th><th>密码</th><th>姓名</th><th>删除</th><th>修改</th></tr>
-                
+                  <% for(int i=0;i<list.size();i++){ %>
+                  <tr>
+                  <td><%=list.get(i).getAmanager_id() %></td>
+                  <td><%=list.get(i).getAmanager_username() %></td>
+                  <td><%=list.get(i).getAmanager_password() %></td>
+                  <td><%=list.get(i).getAmanager_name() %></td>
+                  <td></td>
+                  <td></td>
+                  </tr>
+                 <%} %>
                   
                         
                   
+      <tr><td align="center" colspan="6"><%=request.getAttribute("bar2") %></td></tr>
                   
-                  </table>  
+                  </table>    
+<span><a href="manager_amanager.jsp">管理学院账号</a></span>
+ 					</div>
                   
                   
                   

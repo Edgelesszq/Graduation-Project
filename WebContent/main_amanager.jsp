@@ -7,6 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>天啦噜</p>
+<div>
+     <div>
+	     <ul>
+	          <li><a href="#">主页</a></li>
+	          <li><a href="#">管理老师</a></li>
+	          <li><a href="#">管理学生</a></li>
+	          <li><a href="#">管理论文</a></li>
+	     </ul>
+     </div>
+     <div>
+          
+     </div>
+</div>
 </body>
 </html>

@@ -6,10 +6,12 @@ public class AcademyManager {
      private String amanager_name;
      private String amanager_username;
      private String amanager_password;
+     private int academy_id;
 	public AcademyManager() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public AcademyManager(String amanager_username, String amanager_password) {
 		super();
 		this.amanager_username = amanager_username;
@@ -39,6 +41,36 @@ public class AcademyManager {
 	public void setAmanager_id(int amanager_id) {
 		this.amanager_id = amanager_id;
 	}
+	public int getAcademy_id() {
+		return academy_id;
+	}
+	public void setAcademy_id(int academy_id) {
+		this.academy_id = academy_id;
+	}
+	public AcademyManager(int amanager_id, String amanager_name, String amanager_username, String amanager_password,
+			int academy_id) {
+		super();
+		this.amanager_id = amanager_id;
+		this.amanager_name = amanager_name;
+		this.amanager_username = amanager_username;
+		this.amanager_password = amanager_password;
+		this.academy_id = academy_id;
+	}
+
+	public AcademyManager(String amanager_name, String amanager_username, String amanager_password, int academy_id) {
+		super();
+		this.amanager_name = amanager_name;
+		this.amanager_username = amanager_username;
+		this.amanager_password = amanager_password;
+		this.academy_id = academy_id;
+	}
+
+	public AcademyManager(int amanager_id, String amanager_username) {
+		super();
+		this.amanager_id = amanager_id;
+		this.amanager_username = amanager_username;
+	}
+	
 	
 	
      
