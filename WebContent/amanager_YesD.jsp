@@ -17,26 +17,26 @@
 
 <div class="container">
            <div class="row">
-                  <div class="col-md-12" >导航</div>
-                  <div class="col-md-4">
-                   <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
-						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
-						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
-						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
-						  <li role="presentation"><a href="amanager_profession.jsp">管理专业</a></li>
-						  
-					</ul>    
-		</div>
-                  <div class="col-md-8">
-                  <!-- 表格 -->
+                  
+		    <div class="col-md-12">
+						<div class="col-md-2" style="height: auto; text-align: center;">
+							
+						</div>
+						<div class="col-md-8" style="height: auto; text-align: center;font-size: 20px;">
+							<table class="table table-hover">
+                     				<th></th>
+							</table>
+						</div>
+						<div class="col-md-2" style="height:auto; text-align: center;"></div>
+			</div>
+                  
                  
                   
                   
                   
                   
            </div>
-       </div>
+           </div>
+      
 </body>
 </html>

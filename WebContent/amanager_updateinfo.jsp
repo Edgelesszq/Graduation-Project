@@ -20,8 +20,8 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
-						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
+                          <li role="presentation"> <a href="main_amanager.jsp">首页</a></li>
+						  <li role="presentation" class="active"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
 						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
 						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
 						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
@@ -30,7 +30,28 @@
 					</ul>    
 		</div>
                   <div class="col-md-8">
-                  <!-- 表格 -->
+                 <div class="col-md-12" style="height: 100px;"></div>
+                 <div class="col-md-4" style="height: 300px;"></div>
+                 <div class="col-md-4" style="height: 300px;"> 
+				 <form action="updateAmanagerInfo" >
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">密码修改</label>
+				    <input type="text" name="amanager_password" class="form-control" id="exampleInputEmail1" placeholder="密码">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">姓名修改</label>
+				    <input type="text" name="amanager_name" class="form-control" id="exampleInputPassword1" placeholder="姓名">
+				  </div>
+				  
+				  
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>
+                 
+                 
+                 
+                 </div>
+                 <div class="col-md-4" style="height: 300px;"></div>
+                 <div class="col-md-12"></div> 
                  
                   
                   

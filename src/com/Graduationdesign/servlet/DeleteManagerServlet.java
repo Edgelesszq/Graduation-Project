@@ -2,6 +2,7 @@ package com.Graduationdesign.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ public class DeleteManagerServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		this.doPost(req, resp);
 	}
+
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -82,11 +82,19 @@ public interface UserCRUDDao<T, E> {
      Integer updateTeacherInfo(Connection con,Teacher teacher);
      //管理员修改个人信息
      Integer updateManagerInfo(Connection con,Manager manager);
-   //学院管理员修改个人信息
+     //学院管理员修改个人信息
      Integer updateAmanagerInfo(Connection con,AcademyManager amanager);
-     
-
-     
+    
+     //查询某专业的所有论文
+     List<Dissertation> searchAllDissertationByAcademy(Connection con,int pages,int id);
+     //查询某专业的所有论文数目
+     int searchAllDissertationNumByAcademy(Connection con,int id);
+     //根据id 删除dissertation
+     int deleteDissertationByid(int id,Connection con);
+     //查询已通过审核题目
+     List<Dissertation> searchYesDissbyAcademy_id(int id,Connection con,int status);
+     //根据id查询题目信息
+     Dissertation searchDissByid(int id,Connection con);
      
      
     

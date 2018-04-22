@@ -36,5 +36,27 @@
 				</td></tr>
 			</table>
 		</form>
+		<form action="deleteAmanager">
+			<table>
+				
+				<tr>
+					<td>
+					               用户名：<input type="text" name="amanager_type" />	
+					</td>
+				</tr>
+				
+				<tr>
+					<td>			
+					  <select name="type_option">
+					  <option  value ="type_id" selected="selected">学院管理员id</option>
+					  <option value ="type_username">学院管理员账号</option>
+					  </select>
+					</td>
+				</tr>
+				<tr><td>
+					    <input type="submit" values="删除学院管理员"/>
+				</td></tr>
+			</table>
+		</form>
 </body>
 </html>

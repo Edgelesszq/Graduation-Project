@@ -11,7 +11,7 @@
   </welcome-file-list>
   
   
-  <!-- servlet loaction -->
+  
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.Graduationdesign.servlet.LoginServlet</servlet-class>
@@ -111,5 +111,72 @@
    <servlet-name>UpdateManagerInfo</servlet-name>
     <url-pattern>/updateManagerInfo</url-pattern>
    </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>UpdateAmanagerInfo</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateAmanagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateAmanagerInfo</servlet-name>
+    <url-pattern>/updateAmanagerInfo</url-pattern>
+   </servlet-mapping>
+   
+    <servlet>
+    <servlet-name>DeleteAmanager</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteAmanagerServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteAmanager</servlet-name>
+    <url-pattern>/deleteAmanager</url-pattern>
+   </servlet-mapping>
+   
+    <servlet>
+    <servlet-name>SearchAllDissertation</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllFdissertationServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllDissertation</servlet-name>
+    <url-pattern>/searchAllDissertation</url-pattern>
+   </servlet-mapping>
+   
+   <servlet>
+    <servlet-name>DeleteDissertation</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteDissertationServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteDissertation</servlet-name>
+    <url-pattern>/deleteDissertation</url-pattern>
+   </servlet-mapping>
+   
+    <servlet>
+    <servlet-name>SeeAllDissYes</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllDissertationYesServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SeeAllDissYes</servlet-name>
+    <url-pattern>/seeAllDissYes</url-pattern>
+   </servlet-mapping>
+   
+   
+   
+    <servlet>
+    <servlet-name>SearchDissByid</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchDissByidServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchDissByid</servlet-name>
+    <url-pattern>/searchDissByid</url-pattern>
+   </servlet-mapping>
+   
+ <servlet>
+    <servlet-name>DissNO</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllDissertationNoServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DissNO</servlet-name>
+    <url-pattern>/seeNo</url-pattern>
+   </servlet-mapping>
+   
+  
 </web-app>
   

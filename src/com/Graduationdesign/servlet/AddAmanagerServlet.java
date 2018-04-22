@@ -29,7 +29,7 @@ public class AddAmanagerServlet extends HttpServlet {
 		String amanager_name=req.getParameter("amanager_name");
 		
 		Connection con=DbUtil.getCon();
-		AcademyManager aManager=new AcademyManager(amanager_username,amanager_password,amanager_name,academy_id);
+		AcademyManager aManager=new AcademyManager(amanager_name,amanager_username,amanager_password,academy_id);
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
 		int row=userCRUDDaoImpl.add(aManager, con);
 		DbUtil.Conclose(con);

@@ -1,3 +1,5 @@
+<%@page import="com.Graduationdesign.entity.Dissertation"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,6 +13,7 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%List<Dissertation> dList=(List<Dissertation>)request.getAttribute("resultD"); %>
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,7 +23,7 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
+                          <li role="presentation" > <a href="main_amanager.jsp">首页</a></li>
 						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
 						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
 						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
@@ -29,14 +32,34 @@
 						  
 					</ul>    
 		</div>
-                  <div class="col-md-8">
-                  <!-- 表格 -->
-                 
-                  
-                  
-                  
-                  
-           </div>
+            <div class="col-md-8">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                     <tr> <th>id</th><th>论文名字</th><th>审核状态</th><th>审核</th><th>删除</th></tr>
+                     <%
+                     for(int i=0;i<dList.size();i++){ 
+                    	int id= dList.get(i).getId();
+                    	int status=dList.get(i).getStatus();
+                     %>
+                     <tr>
+                      
+                     	<td><%=dList.get(i).getId() %></td>
+                     	<td><%=dList.get(i).getDis_title() %></td>
+                     	<td><%=dList.get(i).getStatus() %><td>
+                     	<td><a href="deleteDissertation?dissertation_id=<%=id %>&dissertation_status=<%=status %>">删除</a></td>
+                     	
+                     </tr>
+                     <%} %>
+                           <tr><td align="center" colspan="5"><%=request.getAttribute("bar") %></td></tr>
+                     
+                </table>  
+                </div>
+                <div class="col-md-12">
+                
+                 <a href="seeAllYes">查看已通过审核</a>
+                 <a href="seeNo">查看未通过审核</a>
+                </div>
+            </div>
        </div>
 </body>
 </html>

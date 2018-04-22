@@ -1,3 +1,5 @@
+<%@page import="com.Graduationdesign.entity.Dissertation"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,29 +16,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%List<Dissertation> list2=(List<Dissertation>)request.getAttribute("resultND"); %>
 <div class="container">
            <div class="row">
-                  <div class="col-md-12" >导航</div>
-                  <div class="col-md-4">
-                   <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
-						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
-						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
-						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
-						  <li role="presentation"><a href="amanager_profession.jsp">管理专业</a></li>
-						  
-					</ul>    
-		</div>
-                  <div class="col-md-8">
-                  <!-- 表格 -->
+                  
+		    <div class="col-md-12">
+						<div class="col-md-2" style="height: auto; text-align: center;">
+							
+						</div>
+						<div class="col-md-8" style="height: auto; text-align: center;font-size: 20px;">
+							<table class="table table-hover">
+                     				<tr><th style="text-align: center;">id</th><th style="text-align: center;">题目</th></tr>
+                     				<%for(int i=0;i<list2.size();i++){
+                     					int id=list2.get(i).getId();
+                     				%>
+                     				<tr>
+                     				<td><%=list2.get(i).getId() %></td>
+                     				<td><a href="searchDissByid?dissertation_id=<%=id %>"><%=list2.get(i).getDis_title() %></a></td>
+                     				</tr>
+                     				
+                     				<%} %>
+							</table>
+						</div>
+						<div class="col-md-2" style="height:auto; text-align: center;"></div>
+			</div>
+                  
                  
                   
                   
                   
                   
            </div>
-       </div>
+           </div>
+      
 </body>
 </html>

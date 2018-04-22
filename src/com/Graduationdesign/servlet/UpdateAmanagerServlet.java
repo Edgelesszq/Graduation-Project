@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Graduationdesign.dao.impl.UserCRUDDaoImpl;
 import com.Graduationdesign.entity.AcademyManager;
+import com.Graduationdesign.entity.Manager;
 import com.Graduationdesign.util.DbUtil;
 
-public class DeleteAmanagerServlet extends HttpServlet{
+public class UpdateAmanagerServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,41 +23,26 @@ public class DeleteAmanagerServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-		String type=req.getParameter("type_option");
-		Connection con=DbUtil.getCon();
 		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		if(type.equals("type_id")) {
-			int amanager_id=Integer.parseInt(req.getParameter("amanager_type"));
-			AcademyManager aManager=new AcademyManager(amanager_id);
-
-			int row=userCRUDDaoImpl.deleteAmanagerbyType(con, 1, aManager);
-			DbUtil.Conclose(con);
-
-			if (row!=0) {
-				resp.sendRedirect("Success.jsp");
-			}
-			else {
-				resp.sendRedirect("fail.jsp");
-			}
+		Connection con=DbUtil.getCon();
+		if(req.getSession().getAttribute("amanager")==null) {
+			resp.sendRedirect("login.jsp");
 		}
 		else {
-			String amanager_username=req.getParameter("amanager_type");
-
-			AcademyManager aManager=new AcademyManager(amanager_username);
-			int row=userCRUDDaoImpl.deleteAmanagerbyType(con, 2, aManager);
+			AcademyManager aManager1=(AcademyManager) req.getSession().getAttribute("amanager");
+			String amanager_name= req.getParameter("amanager_name");
+			String amanager_password= req.getParameter("amanager_password");
+			AcademyManager amanager=new AcademyManager(aManager1.getAmanager_id(),amanager_name,amanager_password);
+			
+			int row=userCRUDDaoImpl.updateAmanagerInfo(con, amanager);
 			DbUtil.Conclose(con);
-
-			if (row!=0) {
+			if(row!=0) {
 				resp.sendRedirect("Success.jsp");
 			}
 			else {
 				resp.sendRedirect("fail.jsp");
-			}
+			}	
 		}
-		
 	}
-       
+
 }

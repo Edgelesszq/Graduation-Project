@@ -1,6 +1,7 @@
 package com.Graduationdesign.entity;
 
 public class Dissertation {
+	public static final int PAGE_SIZE=10;
 	private int id;
 	private String dis_title;
 	private String dis_context;

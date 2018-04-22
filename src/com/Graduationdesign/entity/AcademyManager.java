@@ -12,6 +12,16 @@ public class AcademyManager {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public AcademyManager(String amanager_username) {
+		super();
+		this.amanager_username = amanager_username;
+	}
+
+	public AcademyManager(int amanager_id) {
+		super();
+		this.amanager_id = amanager_id;
+	}
+
 	public AcademyManager(String amanager_username, String amanager_password) {
 		super();
 		this.amanager_username = amanager_username;
@@ -55,6 +65,15 @@ public class AcademyManager {
 		this.amanager_username = amanager_username;
 		this.amanager_password = amanager_password;
 		this.academy_id = academy_id;
+	}
+
+
+
+	public AcademyManager(int amanager_id, String amanager_name, String amanager_password) {
+		super();
+		this.amanager_id = amanager_id;
+		this.amanager_name = amanager_name;
+		this.amanager_password = amanager_password;
 	}
 
 	public AcademyManager(String amanager_name, String amanager_username, String amanager_password, int academy_id) {

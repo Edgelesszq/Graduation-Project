@@ -47,6 +47,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 	  private final static int type_academy=5;
 	  private final static int type_permission=6;
 	  private final static int type_class=7;
+	  private final static int type_Dissertation=8;
 	  
 	  
 	  private final static int type_student_name=1;
@@ -126,6 +127,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 				ResultSet rSet=pStatement.executeQuery();
 				while(rSet.next()) {
 					retamanager=new AcademyManager();
+					retamanager.setAmanager_id(rSet.getInt("amanager_id"));
 					retamanager.setAmanager_name(rSet.getString("amanager_name"));
 				}
 			} catch (SQLException e) {
@@ -632,6 +634,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			return count;
 			
 		}
+		
 		return 0;
 	}
 	public List searchByStudentName(Connection con, Student student,int type) {
@@ -961,7 +964,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		if(type==1) {
 			try {
 				pStatement=con.prepareStatement(sql1);
-				pStatement.setInt(1,amanager.getAcademy_id());
+				pStatement.setInt(1,aManager.getAmanager_id());
 			     row=pStatement.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -972,7 +975,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		else {
 			try {
 				pStatement=con.prepareStatement(sql1);
-				pStatement.setString(2,amanager.getAmanager_username());
+				pStatement.setString(2,aManager.getAmanager_username());
 			      row=pStatement.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1125,13 +1128,104 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
         }
 	}
 	public Integer updateAmanagerInfo(Connection con, AcademyManager amanager) {
-		String sql="update manager set amanager_password=?,amanager_name=? where amanager_=?";
+		String sql="update amanager set amanager_password=?,amanager_name=? where amanager_id=?";
+		String sql2="update amanager set amanager_password=? where amanager_id=?";
+		String sql3="update amanager set amanager_name=? where amanager_id=?";
+        if(amanager.getAmanager_name()==""&&amanager.getAmanager_password()!="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql2);
+    			pStatement.setString(1,amanager.getAmanager_password());
+    			
+    			pStatement.setInt(2, amanager.getAmanager_id());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+        }
+        else if(amanager.getAmanager_name()!=""&&amanager.getAmanager_password()=="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql3);
+    			
+    			pStatement.setString(1,amanager.getAmanager_name());
+    			pStatement.setInt(2, amanager.getAmanager_id());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+		}
+        else {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql);
+    			pStatement.setString(1,amanager.getAmanager_password());
+    			pStatement.setString(2,amanager.getAmanager_name());
+    			pStatement.setInt(3, amanager.getAmanager_id());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+		}
+		
+	}
+	
+	public List searchAllDissertationByAcademy(Connection con, int pages,int id) {
+		String sql1="select * from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?) order by dissertation_id desc limit ?,?";
+		List<Dissertation> mList=new ArrayList<Dissertation>();
+		try {
+			
+			pStatement=con.prepareStatement(sql1);
+			pStatement.setInt(1, id);
+			pStatement.setInt(2,(pages-1)*Dissertation.PAGE_SIZE);
+			pStatement.setInt(3, Dissertation.PAGE_SIZE);
+			ResultSet resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				dissertation=new Dissertation();
+				dissertation.setId(resultSet.getInt("dissertation_id"));
+				dissertation.setDis_title(resultSet.getString("dissertation_title"));
+				dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+				dissertation.setStatus(resultSet.getInt("dissertation_status"));
+				mList.add(dissertation);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mList;
+	}
+	public int searchAllDissertationNumByAcademy(Connection con, int id) {
+		int count = 0;
+		String sql5="select count(*) from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?)";
+		
+			PreparedStatement pStatement;
+			try {
+				pStatement = con.prepareStatement(sql5);
+				pStatement.setInt(1, id);
+				ResultSet rSet=pStatement.executeQuery();
+				while(rSet.next()) {
+					count=rSet.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return count;
+		}
+	public int deleteDissertationByid(int id, Connection con) {
+		String sql="delete from dissertation where dissertation_id=?";
 		int row=0;
 		try {
 			pStatement=con.prepareStatement(sql);
-			pStatement.setString(1,amanager.getAmanager_password());
-			pStatement.setString(1,amanager.getAmanager_name());
-			pStatement.setInt(3, amanager.getAcademy_id());
+			pStatement.setInt(1, id);
 			row=pStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1139,10 +1233,59 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		}
 		return row;
 	}
+	public List searchYesDissbyAcademy_id(int id, Connection con,int status) {
+		String sql="select * from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?) and dissertation_status=?";
+		List<Dissertation> mList=new ArrayList<Dissertation>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			pStatement.setInt(2, status);
+			ResultSet resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				dissertation=new Dissertation();
+				dissertation.setId(resultSet.getInt("dissertation_id"));
+				dissertation.setDis_title(resultSet.getString("dissertation_title"));
+				dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+				dissertation.setStatus(resultSet.getInt("dissertation_status"));
+				mList.add(dissertation);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mList;
+	}
+	public Dissertation searchDissByid(int id, Connection con) {
+		String sql="select * from dissertation where dissertation_id=?";
+		
+		try {
+			dissertation=new Dissertation();
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				
+				dissertation.setId(resultSet.getInt("dissertation_id"));
+				dissertation.setDis_title(resultSet.getString("dissertation_title"));
+				dissertation.setDis_context(resultSet.getString("dissertation_context"));
+				dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+				dissertation.setStatus(resultSet.getInt("dissertation_status"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dissertation;
+	}
+	
+}
 
 	
 	
 	
    
 
-}
+
