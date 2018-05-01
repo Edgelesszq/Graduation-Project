@@ -29,7 +29,7 @@
 				
 			</table>
 		</form>
-		  <form>
+		  <form action="deleteAcademy" method="post">
 			<table>
 				<tr>
 					<td>			

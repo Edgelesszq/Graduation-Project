@@ -26,13 +26,13 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation"> <a href="main_manager.jsp">首页</a></li>
-                            
+                        <li role="presentation" > <a href="main_manager.jsp">首页</a></li>
 						  <li role="presentation" ><a href="allManager">管理系统账户</a></li>
-						  <li role="presentation"><a href="allAmanager">管理学院账户</a></li>
+						  <li role="presentation" ><a href="allAmanager">管理学院账户</a></li>
 						  <li role="presentation"><a href="allTeacher">管理老师账户</a></li>
-						  <li role="presentation"  class="active"><a href="allStudent">管理学生账户</a></li>
-					</ul>    
+						  <li role="presentation" class="active"><a href="allStudent">管理学生账户</a></li>
+						  <li role="presentation"><a href="searchAllAcademy">管理学院</a></li>
+					</ul>       
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->

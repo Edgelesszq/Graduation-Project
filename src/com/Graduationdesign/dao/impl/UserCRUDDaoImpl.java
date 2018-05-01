@@ -128,7 +128,10 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 				while(rSet.next()) {
 					retamanager=new AcademyManager();
 					retamanager.setAmanager_id(rSet.getInt("amanager_id"));
+					retamanager.setAmanager_username(rSet.getString("amanager_username"));
+					retamanager.setAmanager_password(rSet.getString("amanager_password"));
 					retamanager.setAmanager_name(rSet.getString("amanager_name"));
+					retamanager.setAcademy_id(rSet.getInt("academy_id"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -975,7 +978,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		else {
 			try {
 				pStatement=con.prepareStatement(sql1);
-				pStatement.setString(2,aManager.getAmanager_username());
+				pStatement.setString(1,aManager.getAmanager_username());
 			      row=pStatement.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

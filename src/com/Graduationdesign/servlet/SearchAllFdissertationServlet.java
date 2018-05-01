@@ -40,8 +40,8 @@ public class SearchAllFdissertationServlet extends HttpServlet {
 				currentpage=Integer.parseInt(req.getParameter("page"));//对当前页码进行有效赋值
 			}
 			Connection con=DbUtil.getCon();
-			 @SuppressWarnings("unchecked")
-			List<Dissertation> resultD=userCRUDDaoImpl.searchAllDissertationByAcademy(con, currentpage, amManager.getAmanager_id());
+			@SuppressWarnings("unchecked")
+			List<Dissertation> resultD=userCRUDDaoImpl.searchAllDissertationByAcademy(con, currentpage, amManager.getAcademy_id());
 			int count=userCRUDDaoImpl.searchAllDissertationNumByAcademy(con, amManager.getAmanager_id());
 			
 			DbUtil.Conclose(con);
@@ -65,12 +65,12 @@ public class SearchAllFdissertationServlet extends HttpServlet {
 				sBuffer.append(" ");
 				
 			}
-			req.setAttribute("bar", sBuffer.toString());
+			session.setAttribute("bar", sBuffer.toString());
 			
 		
 		   
 	        if(resultD!=null) {
-	        	req.setAttribute("resultD",resultD);
+	        	session.setAttribute("resultD",resultD);
 	 	       req.getRequestDispatcher("amanager_eva.jsp").forward(req, resp);
 	        }
 	        else {

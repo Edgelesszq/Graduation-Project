@@ -13,7 +13,7 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<%List<Dissertation> dList=(List<Dissertation>)request.getAttribute("resultD"); %>
+<%List<Dissertation> dList=(List<Dissertation>)session.getAttribute("resultD"); %>
 <title>Insert title here</title>
 </head>
 <body>
@@ -50,7 +50,7 @@
                      	
                      </tr>
                      <%} %>
-                           <tr><td align="center" colspan="5"><%=request.getAttribute("bar") %></td></tr>
+                           <tr><td align="center" colspan="5"><%=session.getAttribute("bar") %></td></tr>
                      
                 </table>  
                 </div>

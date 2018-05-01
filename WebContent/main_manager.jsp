@@ -30,7 +30,6 @@
 						  <li role="presentation"><a href="allAmanager">管理学院账户</a></li>
 						  <li role="presentation"><a href="allTeacher">管理老师账户</a></li>
 						  <li role="presentation"><a href="allStudent">管理学生账户</a></li>
-						  <li role="presentation"><a href="addAcademy">添加学院</a></li>
 						  <li role="presentation"><a href="searchAllAcademy">管理学院</a></li>
 						  
 					</ul>    
