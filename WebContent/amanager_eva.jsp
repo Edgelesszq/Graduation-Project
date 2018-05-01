@@ -44,7 +44,7 @@
                      <tr>
                       
                      	<td><%=dList.get(i).getId() %></td>
-                     	<td><%=dList.get(i).getDis_title() %></td>
+                     	<td><a href="searchDissByid?dissertation_id=<%=id %>"><%=dList.get(i).getDis_title() %></a></td>
                      	<td><%=dList.get(i).getStatus() %><td>
                      	<td><a href="deleteDissertation?dissertation_id=<%=id %>&dissertation_status=<%=status %>">删除</a></td>
                      	
