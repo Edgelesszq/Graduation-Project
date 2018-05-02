@@ -35,6 +35,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 	 private  PreparedStatement pStatement;
 	  private ResultSet resultSet;
 	  
+	  private List<Teacher> listteacher;
 	  private List<Student> listStudent;
 	  private List<Academy> academies;
 	  private List<Profession> professions;
@@ -535,7 +536,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 					teacher=new Teacher();
 					teacher.setTeacher_id(resultSet.getInt("teacher_id"));
 					teacher.setTeacher_username(resultSet.getString("teacher_username"));
-					teacher.setTeacher_username(resultSet.getString("teacher_password"));
+					teacher.setTeacher_password(resultSet.getString("teacher_password"));
 					teacher.setTeacher_name(resultSet.getString("teacher_name"));
 					aTeachers.add(teacher);
 					
@@ -1248,6 +1249,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 				dissertation=new Dissertation();
 				dissertation.setId(resultSet.getInt("dissertation_id"));
 				dissertation.setDis_title(resultSet.getString("dissertation_title"));
+				dissertation.setDis_context(resultSet.getString("dissertation_context"));
 				dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
 				dissertation.setStatus(resultSet.getInt("dissertation_status"));
 				mList.add(dissertation);
@@ -1282,6 +1284,200 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			e.printStackTrace();
 		}
 		return dissertation;
+	}
+	public int EvaYes(int id, Connection con) {
+		String sql="update dissertation set dissertation_status=2 where dissertation_id=?";
+		int rrow=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			rrow=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rrow;
+	}
+	public int EvaNo(int id, Connection con) {
+		String sql="update dissertation set dissertation_status=0 where dissertation_id=?";
+		int rrow=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			rrow=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rrow;
+	}
+	public List searchTeacherByAcademyId(int id, Connection con) {
+		String sql="select * from Teacher where Academy_id=?";
+		listteacher=new ArrayList<Teacher>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next())
+			{
+				teacher=new Teacher();
+				teacher.setTeacher_id(resultSet.getInt("teacher_id"));
+				teacher.setTeacher_username(resultSet.getString("teacher_username"));
+				teacher.setTeacher_password(resultSet.getString("teacher_password"));
+				teacher.setTeacher_name(resultSet.getString("teacher_name"));
+				listteacher.add(teacher);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listteacher;
+	}
+	public int deleteTeacherByTeacherId(int teacherId, Connection con) {
+		String sql="delete from Teacher where teacher_id=?";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, teacherId);
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	public int addTeacherByAcademyId(int AcademyId, Connection con,Teacher iteacher) {
+		String sql="insert into teacher(teacher_username,teacher_password,teacher_name,academy_id) values(?,?,?,?)";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,iteacher.getTeacher_username());
+			pStatement.setString(2,iteacher.getTeacher_password());
+
+			pStatement.setString(3,iteacher.getTeacher_name());
+			pStatement.setInt(4, AcademyId);
+
+			
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
+	public int addProfesionByAcademy(int AcademyId, Connection con,Profession iProfession) {
+		String sql="insert into profession(profession_name,academy_id) values(?,?)";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1, iProfession.getProfession_name());
+			pStatement.setInt(2, AcademyId);
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	public int addClassByProfession(int profeId, Connection con,Class isClass) {
+		String sql="insert into class(class_name,profession_id) values(?,?)";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1, isClass.getClass_name());
+			pStatement.setInt(2, profeId);
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	public int addStudentbyClass(int ClassId, Connection con,Student iStudent) {
+		String sql="insert into student(student_username,student_password,student_name,class_id) values(?,?,?,?)";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,iStudent.getStudent_username());
+			pStatement.setString(2,iStudent.getStudent_password());
+			pStatement.setString(3,iStudent.getStudent_name());
+			pStatement.setInt(4, ClassId);
+			row=pStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return row;
+	}
+	public List searchProfessionByAcademy(int Academyid, Connection con) {
+		String sql="select * from profession where acdemy_id=?";
+		List<Profession> listpr=new ArrayList<Profession>();
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, Academyid);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				profession=new Profession();
+				profession.setProfession_id(resultSet.getInt("profession_id"));
+				profession.setProfession_name(resultSet.getString("profession_name"));
+				listpr.add(profession);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listpr;
+	}
+	public List searchClassByProfession(int ProfessID, Connection con) {
+		String sql="select * from class where profession_id=?";
+		List<Class> listpr=new ArrayList<Class>();
+		Class aClass;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, ProfessID);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				aClass=new Class();
+				aClass.setClass_id(resultSet.getInt("class_id"));
+				aClass.setClass_name(resultSet.getString("class_name"));
+				listpr.add(aClass);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listpr;
+	
+	}
+	public List searchStudentByClass(int ClassId, Connection con) {
+		String sql="select * from student where class_id=?";
+		List<Student> listpr=new ArrayList<Student>();
+		Student astudent;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, ClassId);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				astudent=new Student();
+				astudent.setClass_id(resultSet.getInt("student_id"));
+				astudent.setStudent_name(resultSet.getString("student_name"));
+				astudent.setStudent_username(resultSet.getString("student_username"));
+				astudent.setStudent_password(resultSet.getString("student_password"));
+				listpr.add(astudent);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listpr;
 	}
 	
 }

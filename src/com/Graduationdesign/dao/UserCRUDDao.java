@@ -95,6 +95,28 @@ public interface UserCRUDDao<T, E> {
      List<Dissertation> searchYesDissbyAcademy_id(int id,Connection con,int status);
      //根据id查询题目信息
      Dissertation searchDissByid(int id,Connection con);
+     //审核通过
+     int EvaYes(int id,Connection con);
+     //审核驳回
+     int EvaNo(int id,Connection con);
+     //根据学院id查找各自学院的老师
+     List<Teacher> searchTeacherByAcademyId(int id,Connection con);
+     //根据老师id删除老师
+     int deleteTeacherByTeacherId(int teacherId,Connection con);
+     //学院添加老师
+     int addTeacherByAcademyId(int AcademyId,Connection con,Teacher iteacher);
+     //学院添加专业
+     int addProfesionByAcademy(int AcademyId,Connection con,Profession iProfession);
+     //专业添加班级
+     int addClassByProfession(int profeId,Connection con,Class isClass);
+     //根据班级添加学生
+     int addStudentbyClass(int ClassId,Connection con,Student isStudent);
+     //根据学院查找所有的专业
+     List<Profession> searchProfessionByAcademy(int Academyid,Connection con);
+     //根据专业查找所有班级
+     List<Class>   searchClassByProfession(int ProfessID,Connection con);
+     //根据班级查找所有学生
+     List<Student> searchStudentByClass(int ClassId,Connection con);
      
      
     

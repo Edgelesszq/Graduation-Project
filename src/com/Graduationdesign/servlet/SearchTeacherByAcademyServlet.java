@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
+
 import com.Graduationdesign.dao.impl.UserCRUDDaoImpl;
 import com.Graduationdesign.entity.AcademyManager;
-import com.Graduationdesign.entity.Dissertation;
+import com.Graduationdesign.entity.Teacher;
 import com.Graduationdesign.util.DbUtil;
 
-public class SearchAllDissertationNoServlet extends HttpServlet {
+public class SearchTeacherByAcademyServlet extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -24,31 +27,21 @@ public class SearchAllDissertationNoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
-		
-		HttpSession session=req.getSession();
-		if(session.getAttribute("amanager")==null) {
+		HttpSession hSession=req.getSession();
+		if(hSession.getAttribute("amanager")==null) {
 			resp.sendRedirect("login.jsp");
 		}
 		else {
-			AcademyManager amManager=(AcademyManager) session.getAttribute("amanager");
-	
-			Connection con=DbUtil.getCon();
-			 @SuppressWarnings("unchecked")
-			List<Dissertation> resultD=userCRUDDaoImpl.searchYesDissbyAcademy_id(amManager.getAcademy_id(),con, 0);			
-			DbUtil.Conclose(con);
-
-		   
-	        if(resultD!=null) {
-	        	req.setAttribute("resultND2",resultD);
-	 	       req.getRequestDispatcher("amanager_NoD.jsp").forward(req, resp);
-	        }
-	        else {
-				resp.sendRedirect("fail.jsp");
-			}
-	       
+			AcademyManager aManager=(AcademyManager) hSession.getAttribute("amanager");
+			
+			UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+			Connection connection=DbUtil.getCon();
+			List<Teacher> tList=userCRUDDaoImpl.searchTeacherByAcademyId(aManager.getAcademy_id(), connection);
+			DbUtil.Conclose(connection);
+		    hSession.setAttribute("teacherlist", tList);
+		    resp.sendRedirect("amanager_teacher.jsp");
 		}
 		
 	}
+
 }

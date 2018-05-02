@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@page import="com.Graduationdesign.entity.Teacher"%>
+    <%@page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%List<Teacher> tlist=(List<Teacher>)session.getAttribute("teacherlist"); %>
 <div class="container">
            <div class="row">
                   <div class="col-md-12" >导航</div>
@@ -23,7 +25,7 @@
                           <li role="presentation" > <a href="main_amanager.jsp">首页</a></li>
 						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
 						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation" class="active"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
+						  <li role="presentation" class="active"><a href="academyTeacher">本学院所有老师管理</a></li>
 						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
 						  <li role="presentation"><a href="amanager_profession.jsp">管理专业</a></li>
 						  
@@ -31,9 +33,20 @@
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                 
+                 <table class="table table-striped">
+						<tr><th>id</th><th>用户名</th><th>姓名</th><th>操作</th></tr>
+						<%for(int i=0;i<tlist.size();i++){
+							%>
+							<tr>
+								<td><%=tlist.get(i).getTeacher_id() %></td>
+								<td><%=tlist.get(i).getTeacher_username() %></td>
+								<td><%=tlist.get(i).getTeacher_name() %></td>
+								<td><a href="deleteTeacherByid?teacher_id=<%=tlist.get(i).getTeacher_id() %>">删除</a></td>
+							</tr>
+						<%} %>
+				</table>
                   
-                  
+                  <span><a href="addTeacher">添加老师</a></span>
                   
                   
            </div>

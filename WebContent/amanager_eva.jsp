@@ -35,7 +35,7 @@
             <div class="col-md-8">
             <div class="col-md-12">
                 <table class="table table-striped">
-                     <tr> <th>id</th><th>论文名字</th><th>审核状态</th><th>审核</th><th>删除</th></tr>
+                     <tr> <th>id</th><th>论文名字</th><th>审核状态</th><th>删除</th></tr>
                      <%
                      for(int i=0;i<dList.size();i++){ 
                     	int id= dList.get(i).getId();
@@ -50,7 +50,7 @@
                      	
                      </tr>
                      <%} %>
-                           <tr><td align="center" colspan="5"><%=session.getAttribute("bar") %></td></tr>
+                           <tr><td align="center" colspan="4"><%=session.getAttribute("bar") %></td></tr>
                      
                 </table>  
                 </div>

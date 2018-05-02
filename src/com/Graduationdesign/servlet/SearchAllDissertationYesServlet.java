@@ -37,13 +37,13 @@ public class SearchAllDissertationYesServlet extends HttpServlet{
 	
 			Connection con=DbUtil.getCon();
 			 @SuppressWarnings("unchecked")
-			List<Dissertation> resultD=userCRUDDaoImpl.searchYesDissbyAcademy_id(amManager.getAmanager_id(),con, 2);			
+			List<Dissertation> resultD=userCRUDDaoImpl.searchYesDissbyAcademy_id(amManager.getAcademy_id(),con, 2);			
 			DbUtil.Conclose(con);
 
 		   
 	        if(resultD!=null) {
-	        	req.setAttribute("resultND",resultD);
-	 	       req.getRequestDispatcher("amanager_eva.jsp").forward(req, resp);
+	        	req.setAttribute("resultND3",resultD);
+	 	       req.getRequestDispatcher("amanager_YesD.jsp").forward(req, resp);
 	        }
 	        else {
 				resp.sendRedirect("fail.jsp");

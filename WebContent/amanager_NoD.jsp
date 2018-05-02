@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%List<Dissertation> list2=(List<Dissertation>)request.getAttribute("resultND"); %>
+<%List<Dissertation> list2=(List<Dissertation>)request.getAttribute("resultND2"); %>
 <div class="container">
            <div class="row">
                   

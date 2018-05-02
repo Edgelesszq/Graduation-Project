@@ -176,7 +176,59 @@
    <servlet-name>DissNO</servlet-name>
     <url-pattern>/seeNo</url-pattern>
    </servlet-mapping>
-   
-  
+   <!-- 审核通过 -->
+    <servlet>
+    <servlet-name>EVAYes</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateDiss2YesServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>EVAYes</servlet-name>
+    <url-pattern>/eavYes</url-pattern>
+   </servlet-mapping>
+   <!-- 审核驳回 -->
+    <servlet>
+    <servlet-name>EVANo</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateDiss2NoServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>EVANo</servlet-name>
+    <url-pattern>/eavNo</url-pattern>
+   </servlet-mapping>
+    <!-- 查看已经通过的 -->
+   <servlet>
+    <servlet-name>SeeAllYes</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllDissertationYesServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SeeAllYes</servlet-name>
+    <url-pattern>/seeAllYes</url-pattern>
+   </servlet-mapping>
+     <!-- 本学院所有老师-->
+   <servlet>
+    <servlet-name>cademyTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchTeacherByAcademyServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AcademyTeacher</servlet-name>
+    <url-pattern>/academyTeacher</url-pattern>
+   </servlet-mapping>
+   <!-- 删除老师-->
+   <servlet>
+    <servlet-name>DeleteTeacherByid</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteTeacherByIdServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteTeacherByid</servlet-name>
+    <url-pattern>/deleteTeacherByid</url-pattern>
+   </servlet-mapping>
+   <!-- 添加老师-->
+  <servlet>
+    <servlet-name>AddTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteTeacherByIdServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AsddTeacher</servlet-name>
+    <url-pattern>/addTeacher</url-pattern>
+   </servlet-mapping>
 </web-app>
   

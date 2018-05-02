@@ -42,9 +42,9 @@
 						
 					</div>
 					<div class="col-md-6" style="height: 100px; text-align: center;">
-						<a href="" style="font-size: 25px; padding-right: 100px;">通过</a>
+						<a href="eavYes?dissertation_id=<%=d.getId() %>" style="font-size: 25px; padding-right: 100px;">通过</a>
 						
-						<a href="" style="font-size: 25px;">驳回</a>
+						<a href="eavNo?dissertation_id=<%=d.getId() %>" style="font-size: 25px;">驳回</a>
 					</div>
 					<div class="col-md-3" style="height: 100px; text-align: center;"></div>
 			</div>
