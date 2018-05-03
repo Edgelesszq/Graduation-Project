@@ -35,9 +35,7 @@
 							    <input type="text" name="teacher_name" id="exampleInputFile">
 							    
 							  </div>
-							  <div class="checkbox">
-							    
-							  </div>
+							 
 							  <button type="submit" class="btn btn-default">Submit</button>
 </form>
                     

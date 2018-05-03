@@ -24,8 +24,8 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="main_manager.jsp">首页</a></li>
-						  <li role="presentation"><a href="addDissertation.jsp">添加论文</a></li>
+                          <li role="presentation"> <a href="main_manager.jsp">首页</a></li>
+						  <li role="presentation" class="active"><a href="addDissertation.jsp">添加论文</a></li>
 						  <li role="presentation"><a href="glDissertation">管理论文</a></li>
 						  
 						 
@@ -35,7 +35,20 @@
                   <div class="col-md-8">
                   <!-- 表格 -->
                   <table class="table table-hover">
-                
+                  <form action="addDissertation" method="post">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">标题</label>
+					    <input type="text" name="dissertation_title" class="form-control" id="exampleInputEmail1" placeholder="标题">
+					  </div>
+					  <label for="exampleInputPassword1">内容</label>
+					  <div class="form-group">
+					    
+					    <textarea rows="50" style="width: 650px;"  name="dissertation_context" cols="20"></textarea>
+					    
+					  </div>
+					 
+					  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
                   
                         
                   

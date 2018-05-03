@@ -36,6 +36,19 @@ public class Dissertation {
     
 
 
+	public Dissertation(int id, String dis_title, String dis_context) {
+		super();
+		this.id = id;
+		this.dis_title = dis_title;
+		this.dis_context = dis_context;
+	}
+
+	public Dissertation(String dis_title, String dis_context) {
+		super();
+		this.dis_title = dis_title;
+		this.dis_context = dis_context;
+	}
+
 	public Dissertation(int id, String dis_title, String dis_context, int status) {
 		super();
 		this.id = id;

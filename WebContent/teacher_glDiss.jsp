@@ -1,3 +1,4 @@
+<%@page import="com.Graduationdesign.entity.Dissertation"%>
 <%@page import="com.Graduationdesign.entity.AcademyManager"%>
 <%@page import="com.Graduationdesign.entity.Manager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -16,6 +17,7 @@
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
 <title>Insert title here</title>
+<%List<Dissertation> disList=(List<Dissertation>)session.getAttribute("reDissertations"); %>
 </head>
 <body>
 
@@ -35,8 +37,16 @@
                   <div class="col-md-8">
                   <!-- 表格 -->
                   <table class="table table-hover">
-                
-                  
+                       <tr> <th>id</th><th>题目</th><th>学生</th><th>操作</th></tr>
+                  		<%for(int i=0;i<disList.size();i++) {%>
+                  		<tr>
+                  			<td><%=disList.get(i).getId() %></td>
+                  			<td><a href="updateDiss?dissertation_id=<%=disList.get(i).getId() %>"><%=disList.get(i).getDis_title() %></a></td>
+                  			<td><%=disList.get(i).getStudent_id() %></td>
+                  			<td><a href="deleteDissByTeacher?dissertation_id=<%=disList.get(i).getId() %>">删除</a></td>
+                  			
+                  		</tr>
+                  		<%} %>
                         
                   
                   

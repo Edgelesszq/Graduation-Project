@@ -89,6 +89,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 					while(rSet.next()) {
 						retteacher=new Teacher();
 						retteacher.setTeacher_name(rSet.getString("teacher_name"));
+						retteacher.setTeacher_id(rSet.getInt("teacher_id" ));
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -352,9 +353,9 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		return result;
 	}
 	public Integer update_dissertation(Dissertation dissertation, Connection con,int type) {
-		String sql="update dissertation set dissertation_title=? where id=?";//根据id 修改论文题目
-		String sql2="update dissertation set dissertation_title=? and dissertation_context=? where id=?";//根据id修改题目和内容
-		String sql3="update dissertation set dissertation_context where id=?";//根据id修改论文内容
+		String sql="update dissertation set dissertation_title=? where dissertation_id=?";//根据id 修改论文题目
+		String sql2="update dissertation set dissertation_title=? , dissertation_context=? where dissertation_id=?";//根据id修改题目和内容
+		String sql3="update dissertation set dissertation_context where dissertation_id=?";//根据id修改论文内容
 		Integer result=null;
 		try {
 			if(type==1) {
@@ -1478,6 +1479,52 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			e.printStackTrace();
 		}
 		return listpr;
+	}
+	public int addDissertation(Dissertation dissertation, Connection con,int id) {
+		// TODO Auto-generated method stub
+		String sql="insert into dissertation(dissertation_title,dissertation_context,teacher_id) values(?,?,?)";
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1, dissertation.getDis_title());
+			pStatement.setString(2,dissertation.getDis_context());
+			pStatement.setInt(3,id);
+			row=pStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
+	public int upadateDissertation(Dissertation dissertation, Connection con) {
+		//String sql="update dissertation set dissertation"
+		return 0;
+	}
+	public List searchteacherDiss(int teacher_id, Connection con) {
+		String sql="select * from dissertation where teacher_id=?";
+		List<Dissertation> dissertations=new ArrayList<Dissertation>();
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1,teacher_id);
+			resultSet=pStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				dissertation=new Dissertation();
+				dissertation.setId(resultSet.getInt("dissertation_id"));
+				dissertation.setDis_title(resultSet.getString("dissertation_title"));
+				dissertation.setStatus(resultSet.getInt("dissertation_status"));
+				dissertation.setStudent_id(resultSet.getInt("student_id"));
+				dissertations.add(dissertation);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dissertations;
 	}
 	
 }

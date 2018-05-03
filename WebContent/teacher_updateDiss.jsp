@@ -1,3 +1,4 @@
+<%@page import="com.Graduationdesign.entity.Dissertation"%>
 <%@page import="com.Graduationdesign.entity.AcademyManager"%>
 <%@page import="com.Graduationdesign.entity.Manager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -16,6 +17,7 @@
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
 <title>Insert title here</title>
+<%Dissertation dissertation=(Dissertation)session.getAttribute("rdissertation"); %>
 </head>
 <body>
 
@@ -34,13 +36,29 @@
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                  <table class="table table-hover">
-                
+                  
+                  <form action="updateDissTeacher" method="post">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">标题</label>
+					    <input type="text" name="dissertation_title" class="form-control" id="exampleInputEmail1" value="<%=dissertation.getDis_title() %>">
+					  </div>
+					  <label for="exampleInputPassword1">内容</label>
+					  <div class="form-group">
+					  
+					    <textarea rows="50" style="width: 650px;"  name="dissertation_context" cols="20"><%=dissertation.getDis_context() %></textarea>
+					  </div>
+					 <div class="form-group">
+					    <label for="exampleInputPassword1"></label>
+					    <input type="text"style="visibility: hidden;"  class="form-control" name="dissertation_id" value="<%=dissertation.getId() %>" id="exampleInputPassword1">
+					    
+					  </div>
+					  <button type="submit" style="text-align: center;" class="btn btn-default">Submit</button>
+                </form>
                   
                         
                   
                   
-                  </table>  
+                 
                   
                   
                   

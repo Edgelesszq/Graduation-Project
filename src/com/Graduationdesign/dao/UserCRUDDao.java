@@ -117,6 +117,14 @@ public interface UserCRUDDao<T, E> {
      List<Class>   searchClassByProfession(int ProfessID,Connection con);
      //根据班级查找所有学生
      List<Student> searchStudentByClass(int ClassId,Connection con);
+     //老师出题
+     int addDissertation(Dissertation dissertation,Connection con,int id);
+     //老师修改题目
+     int  upadateDissertation(Dissertation dissertation,Connection con);
+     //查看单个老师所有题目
+     List<Dissertation> searchteacherDiss(int teacher_id,Connection con);
+     
+     
      
      
     

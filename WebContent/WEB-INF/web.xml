@@ -203,32 +203,50 @@
    <servlet-name>SeeAllYes</servlet-name>
     <url-pattern>/seeAllYes</url-pattern>
    </servlet-mapping>
-     <!-- 本学院所有老师-->
-   <servlet>
-    <servlet-name>cademyTeacher</servlet-name>
-    <servlet-class>com.Graduationdesign.servlet.SearchTeacherByAcademyServlet</servlet-class>
+   <!-- 添加论文   addDissertation -->
+     <servlet>
+    <servlet-name>AddDissertation</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddDissertationServlet</servlet-class>
    </servlet>
    <servlet-mapping>
-   <servlet-name>AcademyTeacher</servlet-name>
-    <url-pattern>/academyTeacher</url-pattern>
+   <servlet-name>AddDissertation</servlet-name>
+    <url-pattern>/addDissertation</url-pattern>
    </servlet-mapping>
-   <!-- 删除老师-->
-   <servlet>
-    <servlet-name>DeleteTeacherByid</servlet-name>
-    <servlet-class>com.Graduationdesign.servlet.DeleteTeacherByIdServlet</servlet-class>
+   <!-- 老师管理论文glDissertation -->
+    <servlet>
+    <servlet-name>GlDissertation</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.GlDissertationServlet</servlet-class>
    </servlet>
    <servlet-mapping>
-   <servlet-name>DeleteTeacherByid</servlet-name>
-    <url-pattern>/deleteTeacherByid</url-pattern>
+   <servlet-name>GlDissertation</servlet-name>
+    <url-pattern>/glDissertation</url-pattern>
    </servlet-mapping>
-   <!-- 添加老师-->
-  <servlet>
-    <servlet-name>AddTeacher</servlet-name>
-    <servlet-class>com.Graduationdesign.servlet.DeleteTeacherByIdServlet</servlet-class>
+   <!-- 老师删除自己的论文 "deleteDissByTeacher-->
+    <servlet>
+    <servlet-name>DeleteDissByTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteDissByTeacherServlet</servlet-class>
    </servlet>
    <servlet-mapping>
-   <servlet-name>AsddTeacher</servlet-name>
-    <url-pattern>/addTeacher</url-pattern>
+   <servlet-name>DeleteDissByTeacher</servlet-name>
+    <url-pattern>/deleteDissByTeacher</url-pattern>
+   </servlet-mapping>
+   <!-- 修改论文 updateDiss-->
+   <servlet>
+    <servlet-name>UpdateDiss</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateDissServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateDiss</servlet-name>
+    <url-pattern>/updateDiss</url-pattern>
+   </servlet-mapping>
+   <!-- 提交修改updateDissbyTeacher -->
+   <servlet>
+    <servlet-name>UpdateDissbyTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateDissbyTeacherServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateDissbyTeacher</servlet-name>
+    <url-pattern>/updateDissTeacher</url-pattern>
    </servlet-mapping>
 </web-app>
   
