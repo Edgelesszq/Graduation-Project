@@ -248,5 +248,59 @@
    <servlet-name>UpdateDissbyTeacher</servlet-name>
     <url-pattern>/updateDissTeacher</url-pattern>
    </servlet-mapping>
+   <!-- 修改老师信息UpdateTeacherInfoServlet -->
+    <servlet>
+    <servlet-name>UpdateTeacherInfo</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateTeacherInfoServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateTeacherInfo</servlet-name>
+    <url-pattern>/updateTeacherInfo</url-pattern>
+   </servlet-mapping>
+   <!-- 查看某个学院的所有      论文serachallDiss -->
+    <servlet>
+    <servlet-name>SerachallDiss</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllFdissertationServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SerachallDiss</servlet-name>
+    <url-pattern>/serachallDiss</url-pattern>
+   </servlet-mapping>
+   <!-- 选择论文choose -->
+    <servlet>
+    <servlet-name>Choose</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.ChooseServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>Choose</servlet-name>
+    <url-pattern>/choose</url-pattern>
+   </servlet-mapping>
+   <!-- 查看论文 seeDiss-->
+    <servlet>
+    <servlet-name>SeeDiss</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SeeDissServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SeeDiss</servlet-name>
+    <url-pattern>/seeDiss</url-pattern>
+   </servlet-mapping>
+   <!-- 退选 noChoose -->
+   <servlet>
+    <servlet-name>NoChoose</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.NoChooseServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>NoChoose</servlet-name>
+    <url-pattern>/noChoose</url-pattern>
+   </servlet-mapping>
+   <!-- 修改学生个人信息 updateStudentInfo-->
+    <servlet>
+    <servlet-name>UpdateStudentInfo</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.UpdateStudentInfoServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>UpdateStudentInfo</servlet-name>
+    <url-pattern>/updateStudentInfo</url-pattern>
+   </servlet-mapping>
 </web-app>
   

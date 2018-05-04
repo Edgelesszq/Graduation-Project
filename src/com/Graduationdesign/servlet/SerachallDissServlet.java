@@ -13,39 +13,39 @@ import javax.servlet.http.HttpSession;
 import com.Graduationdesign.dao.impl.UserCRUDDaoImpl;
 import com.Graduationdesign.entity.AcademyManager;
 import com.Graduationdesign.entity.Dissertation;
-import com.Graduationdesign.entity.Manager;
-import com.Graduationdesign.entity.Student;
-import com.Graduationdesign.service.impl.MyserviceImpl;
 import com.Graduationdesign.util.DbUtil;
 
-public class SearchAllFdissertationServlet extends HttpServlet {
+public class SerachallDissServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3708105607129370299L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.doPost(req, resp);
+			this.doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
+UserCRUDDaoImpl userCRUDDaoImpl=new UserCRUDDaoImpl();
 		
 		HttpSession session=req.getSession();
-		if(session.getAttribute("student")==null) {
+		if(session.getAttribute("amanager")==null) {
 			resp.sendRedirect("login.jsp");
 		}
 		else {
-			Student aStudent=(Student) session.getAttribute("student");
+			AcademyManager amManager=(AcademyManager) session.getAttribute("amanager");
 			int currentpage=1;
 			if(req.getParameter("page")!=null) {
 				currentpage=Integer.parseInt(req.getParameter("page"));//对当前页码进行有效赋值
 			}
 			Connection con=DbUtil.getCon();
-			
-			int academy_id=userCRUDDaoImpl.searchAcademyIdByStudent(aStudent.getStudent_id(), con);
 			@SuppressWarnings("unchecked")
-			List<Dissertation> resultD=userCRUDDaoImpl.searchAllDissertationByAcademy(con, currentpage, academy_id,2);
-			int count=userCRUDDaoImpl.searchAllDissertationNumByAcademy(con, academy_id);
+			List<Dissertation> resultD=userCRUDDaoImpl.searchAllDissertationByAcademy(con, currentpage, amManager.getAcademy_id(),1);
+			int count=userCRUDDaoImpl.searchAllDissertationNumByAcademy(con, amManager.getAmanager_id());
 			
 			DbUtil.Conclose(con);
 			int pages;
@@ -68,20 +68,19 @@ public class SearchAllFdissertationServlet extends HttpServlet {
 				sBuffer.append(" ");
 				
 			}
-			session.setAttribute("bar5", sBuffer.toString());
+			session.setAttribute("bar", sBuffer.toString());
 			
 		
 		   
 	        if(resultD!=null) {
-	        	session.setAttribute("resultD2",resultD);
-	 	       req.getRequestDispatcher("student_chooseDiss.jsp").forward(req, resp);
+	        	session.setAttribute("resultD",resultD);
+	 	       req.getRequestDispatcher("amanager_eva.jsp").forward(req, resp);
 	        }
 	        else {
 				resp.sendRedirect("fail.jsp");
 			}
 	       
 		}
-		
 	}
 
 }

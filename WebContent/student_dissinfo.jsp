@@ -16,8 +16,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
+<%Dissertation sDissertation=(Dissertation)session.getAttribute("rdissertation"); %>
 <title>Insert title here</title>
-<%List<Dissertation> disList=(List<Dissertation>)session.getAttribute("reDissertations"); %>
 </head>
 <body>
 
@@ -26,10 +26,10 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_teacher.jsp">首页</a></li>
-						  <li role="presentation" class="active"><a href="addDissertation.jsp">添加论文</a></li>
-						  <li role="presentation"><a href="glDissertation">管理论文</a></li>
-						   <li role="presentation"  ><a href="teacher_updateinfo.jsp">修改资料</a></li>
+                          <li role="presentation" class="active"> <a href="">首页</a></li>
+						  <li role="presentation" ><a href="serachallDiss">选择论文</a></li>
+						  <li role="presentation"><a href="seeDiss">查看论文</a></li>
+						  <li role="presentation"><a href="student_updateInfo.jsp">修改资料</a></li>
 						  
 						 
 						  
@@ -37,21 +37,22 @@
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                  <table class="table table-hover">
-                       <tr> <th>id</th><th>题目</th><th>学生</th><th>操作</th></tr>
-                  		<%for(int i=0;i<disList.size();i++) {%>
-                  		<tr>
-                  			<td><%=disList.get(i).getId() %></td>
-                  			<td><a href="updateDiss?dissertation_id=<%=disList.get(i).getId() %>"><%=disList.get(i).getDis_title() %></a></td>
-                  			<td><%=disList.get(i).getStudent_id() %></td>
-                  			<td><a href="deleteDissByTeacher?dissertation_id=<%=disList.get(i).getId() %>">删除</a></td>
-                  			
-                  		</tr>
-                  		<%} %>
+                      
                         
+                   <div class="form-group" style="text-align: center;">
+					    <label for="exampleInputEmail1">标题</label>
+					    <h3><%=sDissertation.getDis_title() %></h3>
+					  </div>
+					  
+					  <div class="form-group" style="text-align: center; padding-top: 30px;">
+					  	<label for="exampleInputPassword1"  style="text-align: center;">内容</label>
+					  <h4 style="height: auto;,width: 500px; font-size:25dp;background-color:#FFEFDB;"><%=sDissertation.getDis_context() %></h4>
+					  </div>
+					 <div class="form-group" style="text-align: center;">
+					   <a href="noChoose?dissertation_id=<%=sDissertation.getId() %>">退选</a>
+					    
+					  </div>
                   
-                  
-                  </table>  
                   
                   
                   

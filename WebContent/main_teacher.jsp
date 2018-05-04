@@ -27,6 +27,7 @@
                           <li role="presentation" class="active"> <a href="main_manager.jsp">首页</a></li>
 						  <li role="presentation"><a href="addDissertation.jsp">添加论文</a></li>
 						  <li role="presentation"><a href="glDissertation">管理论文</a></li>
+						  <li role="presentation"><a href="teacher_updateinfo.jsp">修改资料</a></li>
 						  
 						 
 						  

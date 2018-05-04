@@ -24,9 +24,10 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation"> <a href="main_manager.jsp">首页</a></li>
+                          <li role="presentation"> <a href="main_teahcers.jsp">首页</a></li>
 						  <li role="presentation" class="active"><a href="addDissertation.jsp">添加论文</a></li>
 						  <li role="presentation"><a href="glDissertation">管理论文</a></li>
+						  <li role="presentation"><a href="teacher_updateinfo.jsp">修改资料</a></li>
 						  
 						 
 						  

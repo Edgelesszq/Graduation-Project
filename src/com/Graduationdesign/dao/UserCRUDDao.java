@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.text.StyledDocument;
 
+import org.omg.CORBA.ORBPackage.InconsistentTypeCode;
+
 import com.Graduationdesign.entity.Academy;
 import com.Graduationdesign.entity.AcademyManager;
 import com.Graduationdesign.entity.Class;
@@ -86,7 +88,7 @@ public interface UserCRUDDao<T, E> {
      Integer updateAmanagerInfo(Connection con,AcademyManager amanager);
     
      //查询某专业的所有论文
-     List<Dissertation> searchAllDissertationByAcademy(Connection con,int pages,int id);
+     List<Dissertation> searchAllDissertationByAcademy(Connection con,int pages,int id,int type);
      //查询某专业的所有论文数目
      int searchAllDissertationNumByAcademy(Connection con,int id);
      //根据id 删除dissertation
@@ -123,10 +125,18 @@ public interface UserCRUDDao<T, E> {
      int  upadateDissertation(Dissertation dissertation,Connection con);
      //查看单个老师所有题目
      List<Dissertation> searchteacherDiss(int teacher_id,Connection con);
-     
-     
-     
-     
+     //修改老师信息
+     int updateTeacherInfo(Teacher teacher,Connection con);
+     //根据学生查看对应学院
+     int searchAcademyIdByStudent(int id,Connection con);
+     //根据学生id   查看所有本学院的题目
+     List<Dissertation> searchAllDissByStudentid(int id,Connection con,int pages);
+     //学生选择论文
+     int chooseDissbyStudent(int student_id,int dissid,Connection connection,int type);
+     //根据学生id查看其选题内容id
+     int searchDissIdbystudentId(int student_id,Connection connection);
+     //修改学生个人信息
+     int updateStudentInfo(int student_id,String Student_password,String Stduent_name,Connection connection);
     
      
  

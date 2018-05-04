@@ -72,6 +72,12 @@ public class Teacher {
 		this.teacher_name = teacher_name;
 		this.academy_id = academy_id;
 	}
+	public Teacher(int teacher_id, String teacher_password, String teacher_name) {
+		super();
+		this.teacher_id = teacher_id;
+		this.teacher_password = teacher_password;
+		this.teacher_name = teacher_name;
+	}
 
 
 

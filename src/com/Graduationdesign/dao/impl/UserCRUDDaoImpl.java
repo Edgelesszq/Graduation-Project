@@ -19,6 +19,7 @@ import com.Graduationdesign.entity.Profession;
 import com.Graduationdesign.entity.Student;
 import com.Graduationdesign.entity.Teacher;
 import com.mysql.jdbc.RowData;
+import com.mysql.jdbc.Statement;
 
 
 
@@ -70,6 +71,7 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 				while(rSet.next()) {
 					retstudent=new Student();
 					retstudent.setStudent_name(rSet.getString("student_name"));
+					retstudent.setStudent_id(rSet.getInt("student_id"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -1181,35 +1183,65 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		
 	}
 	
-	public List searchAllDissertationByAcademy(Connection con, int pages,int id) {
-		String sql1="select * from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?) order by dissertation_id desc limit ?,?";
+	public List searchAllDissertationByAcademy(Connection con, int pages,int id,int type) {
+		String sql1="select * from dissertation where teacher_id=any(select teacher_id from teacher where academy_id=?) order by dissertation_id desc limit ?,?";
+		String sql2="select * from dissertation where teacher_id=any(select teacher_id from teacher where academy_id=?) and dissertation_status=2 order by dissertation_id desc limit ?,?";
+
 		List<Dissertation> mList=new ArrayList<Dissertation>();
-		try {
-			
-			pStatement=con.prepareStatement(sql1);
-			pStatement.setInt(1, id);
-			pStatement.setInt(2,(pages-1)*Dissertation.PAGE_SIZE);
-			pStatement.setInt(3, Dissertation.PAGE_SIZE);
-			ResultSet resultSet=pStatement.executeQuery();
-			while(resultSet.next()) {
-				dissertation=new Dissertation();
-				dissertation.setId(resultSet.getInt("dissertation_id"));
-				dissertation.setDis_title(resultSet.getString("dissertation_title"));
-				dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
-				dissertation.setStatus(resultSet.getInt("dissertation_status"));
-				mList.add(dissertation);
+
+		if(type==1)
+			{
+			try {
 				
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1, id);
+				pStatement.setInt(2,(pages-1)*Dissertation.PAGE_SIZE);
+				pStatement.setInt(3, Dissertation.PAGE_SIZE);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					dissertation=new Dissertation();
+					dissertation.setId(resultSet.getInt("dissertation_id"));
+					dissertation.setDis_title(resultSet.getString("dissertation_title"));
+					dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+					dissertation.setStatus(resultSet.getInt("dissertation_status"));
+					mList.add(dissertation);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return mList;
+			}
+		else {
+try {
+				
+				pStatement=con.prepareStatement(sql2);
+				pStatement.setInt(1, id);
+				pStatement.setInt(2,(pages-1)*Dissertation.PAGE_SIZE);
+				pStatement.setInt(3, Dissertation.PAGE_SIZE);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					dissertation=new Dissertation();
+					dissertation.setId(resultSet.getInt("dissertation_id"));
+					dissertation.setDis_title(resultSet.getString("dissertation_title"));
+					dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+					dissertation.setStatus(resultSet.getInt("dissertation_status"));
+					mList.add(dissertation);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return mList;
 		}
-		return mList;
 	}
 	public int searchAllDissertationNumByAcademy(Connection con, int id) {
 		int count = 0;
-		String sql5="select count(*) from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?)";
+		String sql5="select count(*) from dissertation where teacher_id=any(select teacher_id from teacher where academy_id=?)";
 		
 			PreparedStatement pStatement;
 			try {
@@ -1526,6 +1558,240 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 		
 		return dissertations;
 	}
+	public int updateTeacherInfo(Teacher teacher, Connection con) {
+		String sql="update teacher set teacher_password=?,teacher_name=? where teacher_id=?";
+		String sql2="update teacher set teacher_password=? where teacher_id=?";
+		String sql3="update teacher set teacher_name=? where teacher_id=?";
+        if(teacher.getTeacher_name()==""&&teacher.getTeacher_password()!="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql2);
+    			pStatement.setString(1,teacher.getTeacher_password());
+    			
+    			pStatement.setInt(2, teacher.getTeacher_id());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+        }
+        else if(teacher.getTeacher_name()!=""&&teacher.getTeacher_password()=="") {
+        	int row=0;
+    		try {
+    			pStatement=con.prepareStatement(sql3);
+    			
+    			pStatement.setString(1,teacher.getTeacher_name());
+    			pStatement.setInt(2, teacher.getTeacher_id());
+    			row=pStatement.executeUpdate();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		return row;
+        }
+        else {
+		int row=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setString(1,teacher.getTeacher_password());
+			pStatement.setString(2,teacher.getTeacher_name());
+			pStatement.setInt(3, teacher.getTeacher_id());
+			row=pStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return row;
+        }
+	}
+	public int searchAcademyIdByStudent(int id, Connection con) {
+		String sql="SELECT academy_id FROM academy WHERE academy_id=(SELECT academy_id FROM profession WHERE profession_id=(SELECT profession_id FROM class WHERE class_id=(SELECT class_id FROM student WHERE student_id=?)))"; 
+		int rid=0;
+		try {
+			pStatement=con.prepareStatement(sql);
+			pStatement.setInt(1, id);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				rid=resultSet.getInt("academy_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rid;
+	}
+	public List searchAllDissByStudentid(int id, Connection con,int pages) {
+			String sql1="select * from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?) order by dissertation_id desc limit ?,?";
+			List<Dissertation> mList=new ArrayList<Dissertation>();
+			try {
+				
+				pStatement=con.prepareStatement(sql1);
+				pStatement.setInt(1, id);
+				pStatement.setInt(2,(pages-1)*Dissertation.PAGE_SIZE);
+				pStatement.setInt(3, Dissertation.PAGE_SIZE);
+				ResultSet resultSet=pStatement.executeQuery();
+				while(resultSet.next()) {
+					dissertation=new Dissertation();
+					dissertation.setId(resultSet.getInt("dissertation_id"));
+					dissertation.setDis_title(resultSet.getString("dissertation_title"));
+					dissertation.setTeacher_id(resultSet.getInt("teacher_id"));
+					dissertation.setStatus(resultSet.getInt("dissertation_status"));
+					mList.add(dissertation);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return mList;
+		}
+	public int chooseDissbyStudent(int student_id,int dissid,Connection connection,int type) {
+		String sql="update student set dissertation_id=? where student_id=?";
+		String sql2="update dissertation set dissertation_status=3 where dissertation_id=?";
+		String sql3="update student set dissertation_id=? where student_id=?";
+		String sql4="update dissertation set dissertation_status=2 where dissertation_id=?";
+		int row=0,row2=0,row3=0,row4=0;
+		
+		if(type==1) {
+			try {
+			    pStatement=connection.prepareStatement(sql);
+			    pStatement.setInt(1, dissid);
+			    pStatement.setInt(2,student_id);
+
+			    row=pStatement.executeUpdate();
+			   
+			   
+			} catch (SQLException e) {
+			
+			
+			e.printStackTrace();
+				
+			}
+			return row;
+		}
+		else if(type==2){
+			try {
+			    pStatement=connection.prepareStatement(sql2);
+			    pStatement.setInt(1,dissid);
+
+			   row2=pStatement.executeUpdate();
+			   
+			   
+			} catch (SQLException e) {
+			
+			
+			e.printStackTrace();
+				
+			}
+			return row2;
+		}
+		else if (type==3){
+			try {
+			    pStatement=connection.prepareStatement(sql3);
+			    pStatement.setNull(1, java.sql.Types.INTEGER);
+			    pStatement.setInt(2,student_id);
+
+			   row3=pStatement.executeUpdate();
+			   
+			   
+			} catch (SQLException e) {
+			
+			
+			e.printStackTrace();
+				
+			}
+			return row3;
+		}
+		else {
+			try {
+			    pStatement=connection.prepareStatement(sql4);
+			    pStatement.setInt(1,dissid);
+
+			   row4=pStatement.executeUpdate();
+			   
+			   
+			} catch (SQLException e) {
+			
+			
+			e.printStackTrace();
+				
+			}
+			return row4;
+		}
+		
+		
+		
+		
+	}
+	public int searchDissIdbystudentId(int student_id, Connection connection) {
+		String sql="select dissertation_id from student where student_id=?";
+		int dissid=0;
+		try {
+			pStatement=connection.prepareStatement(sql);
+			pStatement.setInt(1, student_id);
+			resultSet=pStatement.executeQuery();
+			while(resultSet.next()) {
+				dissid=resultSet.getInt("dissertation_id");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dissid;
+	}
+	public int updateStudentInfo(int student_id, String Student_password, String Stduent_name, Connection connection) {
+		
+			String sql="update student set student_password=?,student_name=? where student_id=?";
+			String sql2="update student set student_password=? where student_id=?";
+			String sql3="update student set student_name=? where student_id=?";
+	        if(Stduent_name==""&&Student_password!="") {
+	        	int row=0;
+	    		try {
+	    			pStatement=connection.prepareStatement(sql2);
+	    			pStatement.setString(1,Student_password);
+	    			
+	    			pStatement.setInt(2, student_id);
+	    			row=pStatement.executeUpdate();
+	    		} catch (SQLException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	    		return row;
+	        }
+	        else if(Stduent_name!=""&&Student_password=="") {
+	        	int row=0;
+	    		try {
+	    			pStatement=connection.prepareStatement(sql3);
+	    			
+	    			pStatement.setString(1,Stduent_name);
+	    			pStatement.setInt(2, student_id);
+	    			row=pStatement.executeUpdate();
+	    		} catch (SQLException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+	    		return row;
+	        }
+	        else {
+			int row=0;
+			try {
+				pStatement=connection.prepareStatement(sql);
+				pStatement.setString(1,Student_password);
+				pStatement.setString(2,Stduent_name);
+				pStatement.setInt(3, student_id);
+				row=pStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return row;
+	       
+		}
+	}
+	
 	
 }
 

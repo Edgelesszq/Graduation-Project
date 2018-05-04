@@ -16,8 +16,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
+<%Dissertation sDissertation=(Dissertation)session.getAttribute("rdissertation"); %>
 <title>Insert title here</title>
-<%List<Dissertation> disList=(List<Dissertation>)session.getAttribute("reDissertations"); %>
 </head>
 <body>
 
@@ -26,10 +26,10 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_teacher.jsp">首页</a></li>
-						  <li role="presentation" class="active"><a href="addDissertation.jsp">添加论文</a></li>
-						  <li role="presentation"><a href="glDissertation">管理论文</a></li>
-						   <li role="presentation"  ><a href="teacher_updateinfo.jsp">修改资料</a></li>
+                          <li role="presentation" class="active"> <a href="">首页</a></li>
+						  <li role="presentation" ><a href="serachallDiss">选择论文</a></li>
+						  <li role="presentation"><a href="seeDiss">查看论文</a></li>
+						  <li role="presentation"><a href="student_updateInfo.jsp">修改资料</a></li>
 						  
 						 
 						  
@@ -37,21 +37,27 @@
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                  <table class="table table-hover">
-                       <tr> <th>id</th><th>题目</th><th>学生</th><th>操作</th></tr>
-                  		<%for(int i=0;i<disList.size();i++) {%>
-                  		<tr>
-                  			<td><%=disList.get(i).getId() %></td>
-                  			<td><a href="updateDiss?dissertation_id=<%=disList.get(i).getId() %>"><%=disList.get(i).getDis_title() %></a></td>
-                  			<td><%=disList.get(i).getStudent_id() %></td>
-                  			<td><a href="deleteDissByTeacher?dissertation_id=<%=disList.get(i).getId() %>">删除</a></td>
-                  			
-                  		</tr>
-                  		<%} %>
+                      
                         
+                   <!-- 表格 -->
+                  <table class="table table-hover">
+                		<form action="updateStudentInfo" method="post">
+                			<label for="exampleInputEmail1">修改个人信息</label>
+                		
+							  <div class="form-group">
+							    <label for="exampleInputEmail1">修改密码</label>
+							    <input type="text" name="student_password" class="form-control" id="exampleInputEmail1" placeholder="password">
+							  	
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">修改姓名</label>
+							    <input type="text" name="student_name" class="form-control" id="exampleInputPassword1" placeholder="name">
+							  </div>
+							 
+							 
+							  <button type="submit" class="btn btn-default">Submit</button>
+							</form>
                   
-                  
-                  </table>  
                   
                   
                   
