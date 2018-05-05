@@ -15,17 +15,48 @@
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-        <form action="login" method="post">
-        <input type="text" name="login_username"/>
-        <input type="password" name="login_password">
-        <select name="login_type">
-              <option value="login_student">学生</option>
-              <option value="login_teacher">老师</option>
-              <option value="login_amanager">学院管理员</option>
-              <option value="login_manager">系统管理员</option>
-        </select>
-        <input type="submit" value="登录"/>
+       
+        <div class="container">
+        <div class="row">
+        	<div class="col-md-12" style="height:300px;"></div>
+        	<div class="col-md-12" style="height:500px;">
+        	
+        	<div class="col-md-4" style="height:500px;">
+        	
+        	
+        	</div><div class="col-md-4" style="height:500px;">
+        	               <h2 style="margin-left:60px ;">毕业论文选题系统</h2>
+        	   
+						  <form action="login" method="post">
+						  <div class="form-group" > 
+						    <label for="exampleInputEmail1">Username</label>
+						    <input type="text" class="form-control" id="exampleInputEmail1"name="login_username" placeholder="用户名">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" name="login_password"  id="exampleInputPassword1" placeholder="密码">
+						  </div>
+						 
+						  <div >
+						    <select name="login_type" class="form-control">
+						              <option value="login_student" >学生</option>
+						              <option value="login_teacher">老师</option>
+						              <option value="login_amanager">学院管理员</option>
+						              <option value="login_manager">系统管理员</option>
+						        </select>
+						  </div>
+						  <button type="submit" style="text-align: center;margin-left: 120px; margin-top: 50px;" class="btn btn-default">登录</button>
+						</form>
+        	</div><div class="col-md-4" style="height:500px;">
+        	
+        	
+        	</div>
+        	</div>
+        	<div class="col-md-12" style="height:300px;"></div>
+        </div>
         
-        </form>
+        
+        </div>
+     
 </body>
 </html>

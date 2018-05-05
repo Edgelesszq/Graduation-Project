@@ -26,10 +26,10 @@
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
                           <li role="presentation" class="active"> <a href="main_manager.jsp">首页</a></li>
-						  <li role="presentation"><a href="allManager">管理系统账户</a></li>
-						  <li role="presentation"><a href="allAmanager">管理学院账户</a></li>
-						  <li role="presentation"><a href="allTeacher">管理老师账户</a></li>
-						  <li role="presentation"><a href="allStudent">管理学生账户</a></li>
+						  <li role="presentation"><a href="allManager">管理系统用户</a></li>
+						  <li role="presentation"><a href="allAmanager">管理学院用户</a></li>
+						  <li role="presentation"><a href="allTeacher">管理老师用户</a></li>
+						  <li role="presentation"><a href="allStudent">管理学生用户</a></li>
 						  <li role="presentation"><a href="searchAllAcademy">管理学院</a></li>
 						  
 					</ul>    
