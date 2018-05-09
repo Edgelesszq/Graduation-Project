@@ -28,8 +28,8 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" class="active"> <a href="">首页</a></li>
-						  <li role="presentation" ><a href="serachallDiss">选择论文</a></li>
+                          <li role="presentation" > <a href="main_student.jsp">首页</a></li>
+						  <li role="presentation"  class="active"><a href="serachallDiss">选择论文</a></li>
 						  <li role="presentation"><a href="seeDiss">查看论文</a></li>
 						  <li role="presentation"><a href="student_updateInfo.jsp">修改资料</a></li>
 						  

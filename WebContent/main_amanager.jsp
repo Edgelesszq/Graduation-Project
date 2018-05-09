@@ -22,10 +22,9 @@
                    <ul class="nav nav-pills nav-stacked">
                           <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
 						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
-						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
-						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
-						  <li role="presentation"><a href="amanager_profession.jsp">管理专业</a></li>
+						  <li role="presentation"><a href="serachallDiss">论文管理</a></li>
+						  <li role="presentation"><a href="academyTeacher">本学院所有老师管理</a></li>
+						  <li role="presentation"><a href="searchAllProfession">管理专业</a></li>
 						  
 					</ul>    
 		</div>

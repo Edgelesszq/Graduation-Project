@@ -137,7 +137,8 @@ public interface UserCRUDDao<T, E> {
      int searchDissIdbystudentId(int student_id,Connection connection);
      //修改学生个人信息
      int updateStudentInfo(int student_id,String Student_password,String Stduent_name,Connection connection);
-    
+     //根据学院id查看所有专业
+     List<Profession> searchProfessionByAademyId(int AcademyId,Connection connection);
      
  
 }

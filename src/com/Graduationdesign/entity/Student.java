@@ -8,6 +8,7 @@ public class Student {
      private String student_password;
      private String student_name;
      private int class_id;
+     private int dissertion_id;
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,6 +79,12 @@ public class Student {
 	}
 	public static int getPageSize() {
 		return PAGE_SIZE;
+	}
+	public int getDissertion_id() {
+		return dissertion_id;
+	}
+	public void setDissertion_id(int dissertion_id) {
+		this.dissertion_id = dissertion_id;
 	}
 	
 	

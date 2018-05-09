@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+      <h3>添加学院管理员</h3>
       <form action="addAmanager">
 			<table>
 				
@@ -36,6 +37,7 @@
 				</td></tr>
 			</table>
 		</form>
+		<h3>根据类型删除学院管理员</h3>
 		<form action="deleteAmanager">
 			<table>
 				

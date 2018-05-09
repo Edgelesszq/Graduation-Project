@@ -139,6 +139,7 @@
     <url-pattern>/searchAllDissertation</url-pattern>
    </servlet-mapping>
    
+    
    <servlet>
     <servlet-name>DeleteDissertation</servlet-name>
     <servlet-class>com.Graduationdesign.servlet.DeleteDissertationServlet</servlet-class>
@@ -260,7 +261,7 @@
    <!-- 查看某个学院的所有      论文serachallDiss -->
     <servlet>
     <servlet-name>SerachallDiss</servlet-name>
-    <servlet-class>com.Graduationdesign.servlet.SearchAllFdissertationServlet</servlet-class>
+    <servlet-class>com.Graduationdesign.servlet.SerachallDissServlet</servlet-class>
    </servlet>
    <servlet-mapping>
    <servlet-name>SerachallDiss</servlet-name>
@@ -301,6 +302,90 @@
    <servlet-mapping>
    <servlet-name>UpdateStudentInfo</servlet-name>
     <url-pattern>/updateStudentInfo</url-pattern>
+   </servlet-mapping>
+   
+   <!--学院管理员查看所有老师  -->
+   <servlet>
+    <servlet-name>AcademyTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchTeacherByAcademyServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AcademyTeacher</servlet-name>
+    <url-pattern>/academyTeacher</url-pattern>
+   </servlet-mapping>
+    <!-- 删除老师-->
+   <servlet>
+    <servlet-name>DeleteTeacherByid</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteTeacherByIdServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteTeacherByid</servlet-name>
+    <url-pattern>/deleteTeacherByid</url-pattern>
+   </servlet-mapping>
+    <!-- 添加老师-->
+  <servlet>
+    <servlet-name>AddTeacher</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddTeahcherServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddTeacher</servlet-name>
+    <url-pattern>/addTeacher</url-pattern>
+   </servlet-mapping>
+   
+     <!-- 添加班级addClass-->
+  <servlet>
+    <servlet-name>AddClass</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddClassServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddClass</servlet-name>
+    <url-pattern>/addClass</url-pattern>
+   </servlet-mapping>
+   <!-- 查看本学院某专业所有班级searchClassByProfess -->
+   <servlet>
+    <servlet-name>SearchClassByProfess</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchClassByProfessServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchClassByProfess</servlet-name>
+    <url-pattern>/searchClassByProfess</url-pattern>
+   </servlet-mapping>
+     <!-- 查看本学院所有专业 -->
+      <servlet>
+    <servlet-name>SearchAllProfession</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllProfessionServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>SearchAllProfession</servlet-name>
+    <url-pattern>/searchAllProfession</url-pattern>
+   </servlet-mapping>
+   
+   <!-- 查看本班级所有学生allStudentbyClass -->
+      <servlet>
+    <servlet-name>AllStudentbyClass</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.SearchAllStudentbyClassServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AllStudentbyClass</servlet-name>
+    <url-pattern>/allStudentbyClass</url-pattern>
+   </servlet-mapping>
+   <!-- 根据班级插入学生 addStudent -->
+    <servlet>
+    <servlet-name>AddStudent</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.AddStudentServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>AddStudent</servlet-name>
+    <url-pattern>/addStudent</url-pattern>
+   </servlet-mapping>
+   <!-- 根据学生id 删除学生  deleteStduent -->
+   <servlet>
+    <servlet-name>DeleteStduent</servlet-name>
+    <servlet-class>com.Graduationdesign.servlet.DeleteStudentServlet2</servlet-class>
+   </servlet>
+   <servlet-mapping>
+   <servlet-name>DeleteStduent</servlet-name>
+    <url-pattern>/deleteStduent</url-pattern>
    </servlet-mapping>
 </web-app>
   

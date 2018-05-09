@@ -8,7 +8,7 @@
 </head>
 <body>
      <div>
-         
+         <h3>添加学院</h3>
         <form action="addAcademy" method="post">
 			<table>
 				<tr>
@@ -29,6 +29,8 @@
 				
 			</table>
 		</form>
+		
+		<h3>根据类型删除学院</h3>
 		  <form action="deleteAcademy" method="post">
 			<table>
 				<tr>

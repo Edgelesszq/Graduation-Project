@@ -1,4 +1,3 @@
-<%@page import="com.Graduationdesign.entity.Dissertation"%>
 <%@page import="com.Graduationdesign.entity.AcademyManager"%>
 <%@page import="com.Graduationdesign.entity.Manager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -16,43 +15,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
-<%Dissertation sDissertation=(Dissertation)session.getAttribute("rdissertation"); %>
 <title>Insert title here</title>
 </head>
 <body>
-
+<% int class_id=Integer.parseInt(request.getParameter("class_id2")); %>
        <div class="container">
            <div class="row">
-                  <div class="col-md-12" >导航</div>
+                  <div class="col-md-12" ></div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_student.jsp">首页</a></li>
-						  <li role="presentation" ><a href="serachallDiss">选择论文</a></li>
-						  <li role="presentation" class="active"><a href="seeDiss">查看论文</a></li>
-						  <li role="presentation"><a href="student_updateInfo.jsp">修改资料</a></li>
-						  
-						 
+                         
 						  
 					</ul>    
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                      
-                        
-                   <div class="form-group"  style="text-align: center;">
-					   <h1> <label for="exampleInputEmail1">标题</label></h1>
-					    <h3><%=sDissertation.getDis_title() %></h3>
-					  </div>
-					  
-					  <div class="form-group" style="text-align: center; padding-top: 30px;">
-					  	<h1><label for="exampleInputPassword1"  style="text-align: center;">内容</label></h1>
-					  <h4 style="height: auto;width: 500px; font-size:25dp;"><%=sDissertation.getDis_context() %></h4>
-					  </div>
-					 <div class="form-group" style="text-align: center;">
-					   <a href="noChoose?dissertation_id=<%=sDissertation.getId() %>">退选</a>
-					    
-					  </div>
+                  <table class="table table-hover">
+                  <form action="addStudent?class_id=<%=class_id %>" method="post">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">用户名</label>
+					    <input type="text" name="student_username" class="form-control" id="exampleInputEmail1" placeholder="用户名">
+					 </div>
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">密码</label>
+					    <input type="text" name="student_password" class="form-control" id="exampleInputEmail1" placeholder="密码">
+					 </div>
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">姓名</label>
+					    <input type="text" name="student_name" class="form-control" id="exampleInputEmail1" placeholder="姓名">
+					 </div>
+					  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
                   
+                        
+                  
+                  
+                  </table>  
                   
                   
                   

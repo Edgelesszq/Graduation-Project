@@ -922,11 +922,13 @@ public class UserCRUDDaoImpl implements UserCRUDDao{
 			resultSet=pStatement.executeQuery();
 			while(resultSet.next()) {
 				student=new Student();
-				student.setClass_id(resultSet.getInt("student_id"));
+				student.setStudent_id(resultSet.getInt("student_id"));
 				student.setStudent_name(resultSet.getString("student_name"));
 				student.setStudent_username(resultSet.getString("student_username"));
 				student.setStudent_password(resultSet.getString("student_password"));
 				student.setClass_id(resultSet.getInt("class_id"));
+				student.setDissertion_id(resultSet.getInt("dissertation_id"));
+				listStudent.add(student);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -1271,7 +1273,7 @@ try {
 		return row;
 	}
 	public List searchYesDissbyAcademy_id(int id, Connection con,int status) {
-		String sql="select * from dissertation where teacher_id=(select teacher_id from teacher where academy_id=?) and dissertation_status=?";
+		String sql="SELECT * FROM dissertation WHERE teacher_id=ANY(SELECT teacher_id FROM teacher WHERE academy_id=?) AND dissertation_status=?";
 		List<Dissertation> mList=new ArrayList<Dissertation>();
 		try {
 			pStatement=con.prepareStatement(sql);
@@ -1451,7 +1453,7 @@ try {
 		return row;
 	}
 	public List searchProfessionByAcademy(int Academyid, Connection con) {
-		String sql="select * from profession where acdemy_id=?";
+		String sql="select * from profession where academy_id=?";
 		List<Profession> listpr=new ArrayList<Profession>();
 		try {
 			pStatement=con.prepareStatement(sql);
@@ -1548,7 +1550,7 @@ try {
 				dissertation.setId(resultSet.getInt("dissertation_id"));
 				dissertation.setDis_title(resultSet.getString("dissertation_title"));
 				dissertation.setStatus(resultSet.getInt("dissertation_status"));
-				dissertation.setStudent_id(resultSet.getInt("student_id"));
+				//dissertation.setStudent_id(resultSet.getInt("student_id"));
 				dissertations.add(dissertation);
 			}
 		} catch (SQLException e) {
@@ -1790,6 +1792,10 @@ try {
 			return row;
 	       
 		}
+	}
+	public List searchProfessionByAademyId(int AcademyId, Connection connection) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

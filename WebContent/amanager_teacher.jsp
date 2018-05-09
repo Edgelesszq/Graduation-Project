@@ -22,13 +22,11 @@
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_amanager.jsp">首页</a></li>
+                            <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
 						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
-						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation" class="active"><a href="academyTeacher">本学院所有老师管理</a></li>
-						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
-						  <li role="presentation"><a href="amanager_profession.jsp">管理专业</a></li>
-						  
+						  <li role="presentation"><a href="serachallDiss">论文管理</a></li>
+						  <li role="presentation"><a href="academyTeacher">本学院所有老师管理</a></li>
+						  <li role="presentation"><a href="searchAllProfession">管理专业</a></li>
 					</ul>    
 		</div>
                   <div class="col-md-8">
@@ -46,7 +44,7 @@
 						<%} %>
 				</table>
                   
-                  <span><a href="addTeacher">添加老师</a></span>
+                  <span><a href="addTeachers.jsp">添加老师</a></span>
                   
                   
            </div>

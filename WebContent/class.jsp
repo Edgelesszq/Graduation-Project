@@ -1,4 +1,4 @@
-<%@page import="com.Graduationdesign.entity.Dissertation"%>
+<%@page import="com.Graduationdesign.entity.Class"%>
 <%@page import="com.Graduationdesign.entity.AcademyManager"%>
 <%@page import="com.Graduationdesign.entity.Manager"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
@@ -16,43 +16,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <%@page import="java.util.*"%>
 <%@page import="com.Graduationdesign.*" %>
-<%Dissertation sDissertation=(Dissertation)session.getAttribute("rdissertation"); %>
 <title>Insert title here</title>
 </head>
 <body>
-
+<%List<Class> clist=(List<Class>)session.getAttribute("cList"); %>
        <div class="container">
            <div class="row">
-                  <div class="col-md-12" >导航</div>
+                  <div class="col-md-12" ></div>
                   <div class="col-md-4">
-                   <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_student.jsp">首页</a></li>
-						  <li role="presentation" ><a href="serachallDiss">选择论文</a></li>
-						  <li role="presentation" class="active"><a href="seeDiss">查看论文</a></li>
-						  <li role="presentation"><a href="student_updateInfo.jsp">修改资料</a></li>
-						  
-						 
-						  
-					</ul>    
+                   
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                      
-                        
-                   <div class="form-group"  style="text-align: center;">
-					   <h1> <label for="exampleInputEmail1">标题</label></h1>
-					    <h3><%=sDissertation.getDis_title() %></h3>
-					  </div>
-					  
-					  <div class="form-group" style="text-align: center; padding-top: 30px;">
-					  	<h1><label for="exampleInputPassword1"  style="text-align: center;">内容</label></h1>
-					  <h4 style="height: auto;width: 500px; font-size:25dp;"><%=sDissertation.getDis_context() %></h4>
-					  </div>
-					 <div class="form-group" style="text-align: center;">
-					   <a href="noChoose?dissertation_id=<%=sDissertation.getId() %>">退选</a>
-					    
-					  </div>
+                  <table class="table table-hover">
+                 	<tr><th>id</th><th>班级名字</th></tr>
+               		<%for(int i=0;i<clist.size();i++){
+               			%>
+               			<tr>
+               			<td><%=clist.get(i).getClass_id() %></td>
+               			<td><a href="allStudentbyClass?class_id=<%=clist.get(i).getClass_id() %>"><%=clist.get(i).getClass_name() %></a></td>
+               			</tr>
+               		<% }%>
                   
+                        
+                  
+                  
+                  </table>  
                   
                   
                   

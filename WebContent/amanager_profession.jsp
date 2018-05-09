@@ -1,3 +1,5 @@
+<%@page import="com.Graduationdesign.entity.Profession"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,28 +16,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%List<Profession> list=(List<Profession>)session.getAttribute("professions2"); %>
 <div class="container">
            <div class="row">
                   <div class="col-md-12" >导航</div>
                   <div class="col-md-4">
                    <ul class="nav nav-pills nav-stacked">
-                          <li role="presentation" > <a href="main_amanager.jsp">首页</a></li>
+                           <li role="presentation" class="active"> <a href="main_amanager.jsp">首页</a></li>
 						  <li role="presentation"><a href="amanager_updateinfo.jsp">修改个人资料</a></li>
-						  <li role="presentation"><a href="searchAllDissertation">论文管理</a></li>
-						  <li role="presentation"><a href="amanager_teacher.jsp">本学院所有老师管理</a></li>
-						  <li role="presentation"><a href="amanager_student.jsp">本学院所有学生管理</a></li>
-						  <li role="presentation" class="active"><a href="amanager_profession.jsp">管理专业</a></li>
-						  
+						  <li role="presentation"><a href="serachallDiss">论文管理</a></li>
+						  <li role="presentation"><a href="academyTeacher">本学院所有老师管理</a></li>
+						  <li role="presentation"><a href="searchAllProfession">管理专业</a></li>
 					</ul>    
 		</div>
                   <div class="col-md-8">
                   <!-- 表格 -->
-                 
+                  <table class="table table-hover">
+                  <tr><th>id</th><th>专业名字</th></tr>
+                  <% for(int i=0;i<list.size();i++){ %>
+                  <tr>
+                  <td><%=list.get(i).getProfession_id() %></td>
+                  <td><a href="searchClassByProfess?profession_id=<%=list.get(i).getProfession_id() %>"><%=list.get(i).getProfession_name() %></a></td>
+                  
+         
+                  </tr>
                   
                   
                   
                   
+                  <%} %>
+                  <a href="addprofession.jsp">添加专业</a>
            </div>
        </div>
 </body>
